@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0F3B3A"/><stop offset="1" stop-color="#33090F"/></linearGradient></defs>
+<rect width="800" height="1000" fill="url(#g)"/>
+<g fill="none" stroke="#C8963E" stroke-opacity=".5" stroke-width="2"><path d="M400 300 520 420 400 540 280 420Z"/><path d="M400 340 480 420 400 500 320 420Z"/></g>
+<text x="400" y="640" text-anchor="middle" font-family="Georgia,serif" font-size="38" fill="#E2C27D">Bridal room</text>
+<text x="400" y="690" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#FBF6EC" fill-opacity=".6">Replace this image</text>
+</svg>

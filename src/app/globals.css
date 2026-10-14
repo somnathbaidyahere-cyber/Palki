@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-ivory font-body text-ink antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-gold;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  /* The mehrab (arched) frame, the one recurring shape across the site. */
+  .arch {
+    border-radius: 999px 999px 0 0;
+  }
+  /* Faint jaali (lattice) pattern for dark sections. */
+  .jaali {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 2 46 24 24 46 2 24Z' fill='none' stroke='%23C8963E' stroke-opacity='0.14' stroke-width='1'/%3E%3Ccircle cx='24' cy='24' r='2' fill='%23C8963E' fill-opacity='0.14'/%3E%3C/svg%3E");
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center bg-gold text-sm md:text-base px-7 py-2 md:py-3 font-medium text-maroon-deep transition hover:bg-gold-light;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center border border-gold text-sm md:text-base px-7 py-2 md:py-3 font-medium text-gold-light transition hover:bg-gold hover:text-maroon-deep;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
