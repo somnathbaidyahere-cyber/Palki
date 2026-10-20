@@ -8,7 +8,7 @@ export default function Visit() {
 
   return (
     <section id="visit">
-      <div className="py-24 sm:py-28">
+      <div className="py-16 sm:py-24  md:py-28">
         <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <SectionHeading align="left" title="Visit us before you decide" text="Walk the hall, see the rooms and talk through your plans with our team." />

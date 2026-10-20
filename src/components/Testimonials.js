@@ -4,7 +4,7 @@ import { TESTIMONIALS } from "@/data/site";
 
 export default function Testimonials() {
   return (
-    <section id="stories" className="jaali bg-maroon-deep py-24 text-ivory sm:py-32">
+    <section id="stories" className="jaali bg-maroon-deep text-ivory py-16 sm:py-24  md:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading dark title="In our guests' words" text="Three families share what their celebration at Palki meant to them." />
         <div className="mt-16 grid gap-14 md:grid-cols-3">

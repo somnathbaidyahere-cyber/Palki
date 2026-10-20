@@ -8,6 +8,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const [activeSection, setActiveSection] = useState("");
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -16,6 +18,42 @@ export default function Navbar() {
   }, []);
 
   const solid = scrolled || open;
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      // Activation line: 30% down the viewport.
+      const activationPoint = window.innerHeight * 0.3;
+
+      let currentSection = "";
+
+      for (const link of NAV_LINKS) {
+        const section = document.querySelector(link.href);
+
+        if (!section) continue;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= activationPoint) {
+          currentSection = link.href;
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
 
   return (
     <header
@@ -37,11 +75,7 @@ export default function Navbar() {
               stroke="white"
               stroke-width="0.9"
             ></path>
-            <path
-              d="M26 7q10-9 20 0"
-              stroke="white"
-              stroke-width="0.9"
-            ></path>
+            <path d="M26 7q10-9 20 0" stroke="white" stroke-width="0.9"></path>
           </svg>
           <p className="font-display text-xl md:text-2xl lg:3xl font-semibold tracking-wide text-gold-light">
             {VENUE.name}
@@ -49,16 +83,33 @@ export default function Navbar() {
         </a>
 
         <ul className="hidden items-center gap-8 lg:flex">
-          {NAV_LINKS.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="text-ivory/85 transition hover:text-gold-light"
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((l) => {
+            const isActive = activeSection === l.href;
+
+            return (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  aria-current={isActive ? "location" : undefined}
+                  className={`relative py-2 transition-colors duration-300 ${
+                    isActive
+                      ? "text-gold-light"
+                      : "text-ivory/85 hover:text-gold-light"
+                  }`}
+                >
+                  {l.label}
+
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-x-0 -bottom-0.5 h-px bg-gold-light transition-transform duration-300 ${
+                      isActive ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
+                </a>
+              </li>
+            );
+          })}
+
           <li>
             <a href="#book" className="btn-gold !py-2">
               Celebrate at Palki
