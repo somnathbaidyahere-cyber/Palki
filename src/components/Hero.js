@@ -3,7 +3,7 @@ import { VENUE } from "@/data/site";
 
 export default function Hero() {
   return (
-    <section id="top" className="jaali relative overflow-hidden bg-maroon-deep pt-28 pb-20 text-ivory sm:pt-36 lg:pb-28">
+    <section id="top" className="jaali relative overflow-hidden bg-maroon-deep pt-24 lg:pt-28 pb-20 text-ivory sm:pt-36 lg:pb-28">
       {/* soft glow behind the form */}
       <div className="pointer-events-none absolute -right-40 top-10 h-[34rem] w-[34rem] rounded-full bg-gold/10 blur-3xl" aria-hidden="true" />
 
@@ -13,7 +13,7 @@ export default function Hero() {
             Where<br />
           traditions become <span className="italic text-gold-light">memories</span>.
           </h1>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-ivory/80">
+          <p className="mt-5 md:mt-7 max-w-xl text-lg leading-relaxed text-ivory/80">
              From the joy of a wedding to the warmth of a family gathering, Palki Garden is where loved ones come together, traditions find their place, and beautiful memories begin. .
           </p>
           <div className="mt-9 flex flex-wrap gap-4">

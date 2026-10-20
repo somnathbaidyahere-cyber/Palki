@@ -4,7 +4,7 @@ import { FEATURES } from "@/data/site";
 
 export default function Features() {
   return (
-    <section id="features" className="jaali bg-maroon py-24 text-ivory sm:py-32">
+    <section id="features" className="jaali bg-maroon text-ivory py-16 sm:py-24  md:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           dark

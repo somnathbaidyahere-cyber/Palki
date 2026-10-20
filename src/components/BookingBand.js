@@ -3,7 +3,7 @@ import SectionHeading from "./ui/SectionHeading";
 
 export default function BookingBand() {
   return (
-    <section id="book" className="bg-ivory-dark py-24 sm:py-28">
+    <section id="book" className="bg-ivory-dark py-16 sm:py-24  md:py-28">
       <div className="mx-auto max-w-4xl px-5 sm:px-8">
         <SectionHeading
           title="Reserve your date"
