@@ -65,38 +65,42 @@ export default function HallReveal() {
       ref={revealRef}
       className={`hall-reveal arch ${isOpen ? "is-open" : ""}`}
     >
-      {/* Hall image behind the doors */}
-      <div className="hall-reveal__scene arch">
-        <img
-          src="/images/about.svg"
-          alt="The main hall at Palki Garden, ready for a wedding celebration"
-          className="hall-reveal__image"
-        />
+      {/* Inner container clipped inside the golden border */}
+      <div className="hall-reveal__inner arch">
+        {/* Hall image behind the doors */}
+        <div className="hall-reveal__scene">
+          <img
+            src="/images/about.svg"
+            alt="The main hall at Palki Garden, ready for a wedding celebration"
+            className="hall-reveal__image"
+          />
 
-        {/* Subtle light escaping from the hall */}
-        <div className="hall-reveal__glare" aria-hidden="true" />
-      </div>
+          {/* Light escaping from the hall */}
+          <div className="hall-reveal__glare" aria-hidden="true" />
+        </div>
 
-      {/* Left door */}
-      <div
-        className="hall-reveal__door hall-reveal__door--left"
-        aria-hidden="true"
-      >
-        <div className="hall-reveal__door-face">
-          <div className="hall-reveal__panel-detail">
-            <span />
+        {/* Center Golden Divider (fades out when open) */}
+        <div className="hall-reveal__center-divider" aria-hidden="true" />
+
+        {/* Left door */}
+        <div
+          className="hall-reveal__door hall-reveal__door--left"
+          aria-hidden="true"
+        >
+          <div className="hall-reveal__door-face">
+            {/* Hollow Ring Handle */}
+            <div className="hall-reveal__ring-handle" />
           </div>
         </div>
-      </div>
 
-      {/* Right door */}
-      <div
-        className="hall-reveal__door hall-reveal__door--right"
-        aria-hidden="true"
-      >
-        <div className="hall-reveal__door-face">
-          <div className="hall-reveal__panel-detail">
-            <span />
+        {/* Right door */}
+        <div
+          className="hall-reveal__door hall-reveal__door--right"
+          aria-hidden="true"
+        >
+          <div className="hall-reveal__door-face">
+            {/* Hollow Ring Handle */}
+            <div className="hall-reveal__ring-handle" />
           </div>
         </div>
       </div>
