@@ -79,17 +79,33 @@ export default function Visit() {
           referrerPolicy="no-referrer-when-downgrade"
           allowFullScreen
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 p-4 sm:p-8">
-          <div className="pointer-events-auto max-w-sm border border-gold bg-maroon-deep p-6 text-ivory shadow-2xl">
-            <p className="font-display text-3xl font-semibold text-gold-light">
+        <div className="pointer-events-none absolute inset-x-0 top-0 p-3 sm:p-5 lg:p-8">
+          <div
+            className="
+      pointer-events-auto
+      w-fit max-w-[min(17rem,100%)]
+      border border-gold/70
+      bg-maroon-deep
+      p-3.5
+      text-ivory
+      shadow-xl
+      sm:max-w-xs sm:p-4
+      lg:max-w-sm lg:p-6
+    "
+          >
+            <p className="font-display text-xl font-semibold text-gold-light sm:text-2xl lg:text-3xl">
               {VENUE.name}
             </p>
-            <p className="mt-2 text-ivory/80">{VENUE.address}</p>
+
+            <p className="mt-1.5 text-xs leading-relaxed text-ivory/80 sm:mt-2 sm:text-sm">
+              {VENUE.address}
+            </p>
+
             <a
               href={`https://www.google.com/maps/dir/?api=1&destination=${q}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-gold mt-5 !py-2"
+              className="btn-gold mt-3 !px-4 !py-2 text-xs sm:mt-4 sm:text-sm"
             >
               Get directions
             </a>
