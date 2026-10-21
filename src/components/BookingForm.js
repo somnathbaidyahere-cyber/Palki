@@ -54,20 +54,40 @@ export default function BookingForm({ id, tone = "light" }) {
 
   async function onSubmit(ev) {
     ev.preventDefault();
+
     const e = validate();
     setErrors(e);
+
     if (Object.keys(e).length) return;
 
     setStatus("sending");
+
     try {
-      const res = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      if (!res.ok) throw new Error("failed");
+      // Replace this with Palki Garden's WhatsApp business number.
+      // Include the country code, without +, spaces, or dashes.
+      const whatsappNumber = "91XXXXXXXXXX";
+
+      const message = [
+        "Hello Palki Garden! I'd like to enquire about hosting an event.",
+        "",
+        `Name: ${values.name}`,
+        `Phone: ${values.phone}`,
+        `Event Type: ${values.type}`,
+        `Preferred Date: ${values.date}`,
+        `Expected Guests: ${values.guests}`,
+        values.email ? `Email: ${values.email}` : "",
+        values.message ? `Additional Details: ${values.message}` : "",
+        "",
+        "Please let me know about availability and booking details.",
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
       setStatus("done");
-      setValues(EMPTY);
     } catch {
       setStatus("error");
     }
@@ -82,10 +102,12 @@ export default function BookingForm({ id, tone = "light" }) {
         <p className="font-display text-3xl font-semibold">
           Thank you. We have your request.
         </p>
-        <p className={`mt-3 ${dark ? "text-ivory/75" : "text-ink/70"}`}>
-          Our team will call you within one working day to confirm your date and
-          arrange a visit.
-        </p>
+        {status === "done" && (
+          <p role="status" className="mt-4 text-sm text-green-700">
+            WhatsApp is opening with your enquiry. Please press Send in WhatsApp
+            to share your details with Palki Garden.
+          </p>
+        )}
         <button
           type="button"
           onClick={() => setStatus("idle")}
