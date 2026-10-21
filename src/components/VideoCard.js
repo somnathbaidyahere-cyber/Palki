@@ -17,7 +17,7 @@ export default function VideoCard({ name, event, video, poster }) {
   return (
     <figure className="text-center">
       {/* Video frame */}
-      <div className="arch relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden border border-gold p-1.5 sm:aspect-[3/4] sm:max-w-[16rem] lg:max-w-[15rem]">
+      <div className="arch relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden border border-gold p-1.5 sm:aspect-[3/4] sm:max-w-[16rem] lg:aspect-[3/5] lg:max-w-[17rem] xl:max-w-[18rem]">
         <div className="arch relative h-full w-full overflow-hidden bg-maroon-deep">
           <video
             ref={ref}
