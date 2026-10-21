@@ -26,15 +26,9 @@ export default function Features() {
       const dx = (x - xc) / xc;
       const dy = (y - yc) / yc;
 
-      card.style.setProperty(
-        "--rotate-x",
-        `${(-dy * 4).toFixed(2)}deg`
-      );
+      card.style.setProperty("--rotate-x", `${(-dy * 4).toFixed(2)}deg`);
 
-      card.style.setProperty(
-        "--rotate-y",
-        `${(dx * 4).toFixed(2)}deg`
-      );
+      card.style.setProperty("--rotate-y", `${(dx * 4).toFixed(2)}deg`);
     });
   };
 
@@ -64,15 +58,13 @@ export default function Features() {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className="
-           px-3
-            features-grid
-            mt-16
-            flex flex-col
-            gap-0
-            sm:grid sm:grid-cols-2 sm:gap-px
-            sm:overflow-hidden sm:border sm:border-gold/30 sm:bg-gold/30
-            lg:grid-cols-3
-          "
+  features-grid
+  mt-16
+  flex flex-col gap-0
+  sm:grid sm:grid-cols-2 sm:gap-px
+  sm:overflow-hidden sm:border sm:border-gold/30 sm:bg-gold/30
+  md:grid-cols-3
+"
         >
           {FEATURES.map((f, index) => (
             <li

@@ -387,24 +387,36 @@
    TABLET AND DESKTOP GRID
 ========================================= */
 
-@media (min-width: 640px) {
+@media (max-width: 639px) {
   .features-grid {
-    display: grid;
-    gap: 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+    background: transparent;
   }
 
   .feature-card {
-    position: relative;
-    top: auto;
-    z-index: auto;
+    position: sticky;
+    top: 80px;
+    z-index: var(--stack-index);
 
-    margin-bottom: 0;
-    border-radius: 0;
-    box-shadow: none;
+    /* Fully opaque card surface */
+    background: #300b12;
 
-    transform:
-      rotateX(var(--rotate-x, 0deg))
-      rotateY(var(--rotate-y, 0deg));
+    border: 1px solid rgb(198 161 91 / 35%);
+    border-radius: 18px;
+    margin-bottom: 18px;
+
+    box-shadow:
+      0 -8px 22px rgb(0 0 0 / 22%),
+      inset 0 1px 0 rgb(198 161 91 / 18%);
+
+    transform: none;
+  }
+
+  .feature-card:hover {
+    background: #3a111a;
   }
 }
 
