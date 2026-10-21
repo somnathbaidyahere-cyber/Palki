@@ -4,7 +4,7 @@ import HallReveal from "./ui/HallReveal";
 
 export default function About() {
   return (
-    <section id="about" className="py-16 sm:py-24  md:py-32">
+    <section id="about" className="py-16 sm:py-24 md:py-28  lg:py-32">
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-2">
         <div className="relative mx-auto w-full max-w-md">
           <HallReveal />

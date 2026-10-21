@@ -21,13 +21,13 @@ export default function BookingForm({ id, tone = "light" }) {
   const dark = tone === "dark";
   const today = new Date().toISOString().split("T")[0];
 
-const field = dark
-  ? `box-border w-full min-w-0 border border-gold/40 bg-white/5
+  const field = dark
+    ? `box-border w-full min-w-0 border border-gold/40 bg-white/5
      px-3 py-2 text-xs md:text-sm md:text-base leading-5 text-ivory
      placeholder:text-xs md:placeholder:text-sm placeholder:text-ivory/40
      focus:border-gold focus:outline-none
      md:px-4 md:py-2`
-  : `box-border w-full min-w-0 border border-maroon/20 bg-white
+    : `box-border w-full min-w-0 border border-maroon/20 bg-white
      px-3 py-2 text-sm leading-5 text-ink
      placeholder:text-xs placeholder:text-ink/40
      focus:border-gold focus:outline-none
@@ -101,27 +101,33 @@ const field = dark
     <form
       onSubmit={onSubmit}
       noValidate
-      className="grid gap-2 md:gap-4 sm:grid-cols-2"
+      className="grid grid-cols-1 gap-x-5 gap-y-3 sm:grid-cols-2 sm:gap-y-4"
     >
-      <div>
-        <label htmlFor={`${id}-name`} className={label}>
+      {/* Name */}
+      <div className="min-w-0">
+        <label htmlFor={`${id}-name`} className={`${label} mb-1 block`}>
           Your name
         </label>
+
         <input
           id={`${id}-name`}
           name="name"
           value={values.name}
           onChange={onChange}
           autoComplete="name"
-          className={field}
+          className={`${field} h-10 w-full`}
           placeholder="Full name"
         />
+
         {errors.name && <p className={errorText}>{errors.name}</p>}
       </div>
-      <div>
-        <label htmlFor={`${id}-phone`} className={label}>
+
+      {/* Phone */}
+      <div className="min-w-0">
+        <label htmlFor={`${id}-phone`} className={`${label} mb-1 block`}>
           Phone
         </label>
+
         <input
           id={`${id}-phone`}
           name="phone"
@@ -129,13 +135,16 @@ const field = dark
           value={values.phone}
           onChange={onChange}
           autoComplete="tel"
-          className={field}
+          className={`${field} h-10 w-full`}
           placeholder="10-digit mobile number"
         />
+
         {errors.phone && <p className={errorText}>{errors.phone}</p>}
       </div>
-      <div>
-        <label htmlFor={`${id}-type`} className={label}>
+
+      {/* Event type */}
+      <div className="min-w-0">
+        <label htmlFor={`${id}-type`} className={`${label} mb-1 block`}>
           Type of event
         </label>
 
@@ -144,7 +153,7 @@ const field = dark
           name="type"
           value={values.type}
           onChange={onChange}
-          className={`${field} appearance-none text-sm`}
+          className={`${field} h-10 w-full appearance-none text-sm`}
         >
           {EVENT_TYPES.map((t) => (
             <option key={t} value={t} className="text-ink">
@@ -154,8 +163,9 @@ const field = dark
         </select>
       </div>
 
-      <div>
-        <label htmlFor={`${id}-date`} className={label}>
+      {/* Event date */}
+      <div className="min-w-0">
+        <label htmlFor={`${id}-date`} className={`${label} mb-1 block`}>
           Event date
         </label>
 
@@ -166,17 +176,20 @@ const field = dark
           min={today}
           value={values.date}
           onChange={onChange}
-          className={`${field} appearance-none text-sm ${
+          className={`${field} h-10 w-full appearance-none text-sm ${
             dark ? "[color-scheme:dark]" : ""
           }`}
         />
 
         {errors.date && <p className={errorText}>{errors.date}</p>}
       </div>
-      <div>
-        <label htmlFor={`${id}-guests`} className={label}>
+
+      {/* Number of guests */}
+      <div className="min-w-0">
+        <label htmlFor={`${id}-guests`} className={`${label} mb-1 block`}>
           Number of guests
         </label>
+
         <input
           id={`${id}-guests`}
           name="guests"
@@ -186,15 +199,19 @@ const field = dark
           max={MAX_GUESTS}
           value={values.guests}
           onChange={onChange}
-          className={field}
+          className={`${field} h-10 w-full`}
           placeholder={`Up to ${MAX_GUESTS}`}
         />
+
         {errors.guests && <p className={errorText}>{errors.guests}</p>}
       </div>
-      <div>
-        <label htmlFor={`${id}-email`} className={label}>
+
+      {/* Email */}
+      <div className="min-w-0">
+        <label htmlFor={`${id}-email`} className={`${label} mb-1 block`}>
           Email (optional)
         </label>
+
         <input
           id={`${id}-email`}
           name="email"
@@ -202,35 +219,40 @@ const field = dark
           value={values.email}
           onChange={onChange}
           autoComplete="email"
-          className={field}
+          className={`${field} h-10 w-full`}
           placeholder="you@example.com"
         />
       </div>
-      <div className="sm:col-span-2">
-        <label htmlFor={`${id}-message`} className={label}>
+
+      {/* Additional message */}
+      <div className="min-w-0 sm:col-span-2">
+        <label htmlFor={`${id}-message`} className={`${label} mb-1 block`}>
           Anything we should know? (optional)
         </label>
+
         <textarea
           id={`${id}-message`}
           name="message"
-          // rows={3}
+          rows={2}
           value={values.message}
           onChange={onChange}
-         className={`${field} h-16 resize-y sm:h-20 lg:h-24`}
+          className={`${field} min-h-16 w-full resize-y sm:min-h-20 lg:min-h-24`}
           placeholder="Rituals, decoration ideas, rooms needed..."
         />
       </div>
 
+      {/* Submit */}
       <div className="sm:col-span-2">
         <button
           type="submit"
           disabled={status === "sending"}
-          className="btn-gold w-full disabled:opacity-60"
+          className="btn-gold min-h-10 w-full disabled:opacity-60"
         >
           {status === "sending" ? "Sending..." : "Check availability"}
         </button>
+
         {status === "error" && (
-          <p role="alert" className={`mt-3 text-center ${errorText}`}>
+          <p role="alert" className={`mt-2 text-center ${errorText}`}>
             We could not send your request. Please try again or call us.
           </p>
         )}
