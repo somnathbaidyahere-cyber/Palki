@@ -12,7 +12,7 @@ export default function LocalBusinessSchema() {
 
     telephone: TELEPHONE,
     image: `${SITE_URL}/images/palki-garden-venue.jpg`,
-    priceRange: "₹30k - ₹1Lac",
+    priceRange: "₹1Lac+GST Onwards",
 
     address: {
       "@type": "PostalAddress",

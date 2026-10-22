@@ -104,7 +104,7 @@ export default function BookingForm({ id, tone = "light" }) {
       // Web3Forms configuration
       formData.append(
         "access_key",
-        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KE,
+        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
       );
       formData.append(
         "subject",
