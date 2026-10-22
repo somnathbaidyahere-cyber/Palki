@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { EVENT_TYPES, MAX_GUESTS } from "@/data/site";
+import Link from "next/link"
 
 const EMPTY = {
   name: "",
@@ -54,20 +55,40 @@ export default function BookingForm({ id, tone = "light" }) {
 
   async function onSubmit(ev) {
     ev.preventDefault();
+
     const e = validate();
     setErrors(e);
+
     if (Object.keys(e).length) return;
 
     setStatus("sending");
+
     try {
-      const res = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      if (!res.ok) throw new Error("failed");
+      // Replace this with Palki Garden's WhatsApp business number.
+      // Include the country code, without +, spaces, or dashes.
+      const whatsappNumber = "91XXXXXXXXXX";
+
+      const message = [
+        "Hello Palki Garden! I'd like to enquire about hosting an event.",
+        "",
+        `Name: ${values.name}`,
+        `Phone: ${values.phone}`,
+        `Event Type: ${values.type}`,
+        `Preferred Date: ${values.date}`,
+        `Expected Guests: ${values.guests}`,
+        values.email ? `Email: ${values.email}` : "",
+        values.message ? `Additional Details: ${values.message}` : "",
+        "",
+        "Please let me know about availability and booking details.",
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
       setStatus("done");
-      setValues(EMPTY);
     } catch {
       setStatus("error");
     }
@@ -82,10 +103,12 @@ export default function BookingForm({ id, tone = "light" }) {
         <p className="font-display text-3xl font-semibold">
           Thank you. We have your request.
         </p>
-        <p className={`mt-3 ${dark ? "text-ivory/75" : "text-ink/70"}`}>
-          Our team will call you within one working day to confirm your date and
-          arrange a visit.
-        </p>
+        {status === "done" && (
+          <p role="status" className="mt-4 text-sm text-green-700">
+            WhatsApp is opening with your enquiry. Please press Send in WhatsApp
+            to share your details with Palki Garden.
+          </p>
+        )}
         <button
           type="button"
           onClick={() => setStatus("idle")}
@@ -115,7 +138,7 @@ export default function BookingForm({ id, tone = "light" }) {
           value={values.name}
           onChange={onChange}
           autoComplete="name"
-          className={`${field} h-10 w-full`}
+          className={`${field} h-10 w-full min-[500px]:max-sm:rounded-t-[2rem] sm:rounded-tl-[2rem] md:rounded-tl-[2.5rem] lg:rounded-none`}
           placeholder="Full name"
         />
 
@@ -135,7 +158,7 @@ export default function BookingForm({ id, tone = "light" }) {
           value={values.phone}
           onChange={onChange}
           autoComplete="tel"
-          className={`${field} h-10 w-full`}
+          className={`${field} h-10 w-full sm:rounded-tr-[2rem] md:rounded-tr-[2.5rem] lg:rounded-none`}
           placeholder="10-digit mobile number"
         />
 
@@ -242,17 +265,17 @@ export default function BookingForm({ id, tone = "light" }) {
       </div>
 
       {/* Submit */}
-      <div className="sm:col-span-2">
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="btn-gold min-h-10 w-full disabled:opacity-60"
-        >
+     <div className="sm:col-span-2">
+        <button type="submit" disabled={status === "sending"} className="btn-gold w-full disabled:opacity-60">
           {status === "sending" ? "Sending..." : "Check availability"}
         </button>
-
+        <p className={`mt-3 text-center text-sm ${dark ? "text-ivory/60" : "text-ink/60"}`}>
+          By sending this, you agree to our{" "}
+          <Link href="/privacy-policy" className="underline decoration-gold underline-offset-4">Privacy Policy</Link> and{" "}
+          <Link href="/terms-and-conditions" className="underline decoration-gold underline-offset-4">Terms</Link>.
+        </p>
         {status === "error" && (
-          <p role="alert" className={`mt-2 text-center ${errorText}`}>
+          <p role="alert" className={`mt-3 text-center ${errorText}`}>
             We could not send your request. Please try again or call us.
           </p>
         )}
