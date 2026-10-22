@@ -1,5 +1,6 @@
 import { Cormorant_Garamond, Mukta } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/data/site";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -17,9 +18,51 @@ const body = Mukta({
 });
 
 export const metadata = {
-  title: "Event venue for weddings and celebrations | Palki Garden",
+  metadataBase: new URL(SITE_URL),
+
+  title: {
+    default: "Palki Garden | Wedding & Event Venue",
+    template: "%s | Palki Garden",
+  },
+
   description:
-    "Palki is a fully air-conditioned 5,000 sq ft event hall for up to 700 guests, with a dedicated kitchen, custom decoration and on-site guest rooms.",
+    "Celebrate weddings, family gatherings and special occasions at Palki Garden. Explore our air-conditioned event hall, guest rooms and event facilities.",
+
+  applicationName: "Palki Garden",
+
+  alternates: {
+    canonical: "/",
+  },
+
+  openGraph: {
+    title: "Palki Garden | Wedding & Event Venue",
+    description:
+      "A welcoming venue for weddings, family celebrations and special occasions, with an air-conditioned event hall and guest accommodation.",
+    url: "/",
+    siteName: "Palki Garden",
+    locale: "en_IN",
+    type: "website",
+      images: [
+    {
+      url: "/images/palki-garden-og.jpg",
+      width: 1200,
+      height: 630,
+      alt: "Palki Garden — wedding and event venue",
+    },
+  ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Palki Garden | Wedding & Event Venue",
+    description:
+      "Discover Palki Garden for weddings, family gatherings and special celebrations.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {
