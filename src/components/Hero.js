@@ -42,7 +42,7 @@ export default function Hero() {
           className="animate-rise mx-auto w-full min-w-0 max-w-3xl [animation-delay:200ms]"
         >
           <div className="arch w-full min-w-0 border border-gold/50 p-1.5 sm:p-2">
-            <div className="arch w-full min-w-0 bg-maroon/80 px-3 pb-8 pt-16 backdrop-blur sm:px-6 md:px-8 lg:px-10">
+            <div className="arch w-full min-w-0 bg-maroon/80 pb-8 pt-16 backdrop-blur px-4 min-[430px]:max-sm:px-8 sm:px-12 md:px-16 lg:px-10">
               <h2 className="text-center text-2xl font-semibold text-gold-light lg:text-3xl">
                 Plan your date
               </h2>

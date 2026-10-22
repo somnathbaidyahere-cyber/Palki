@@ -137,7 +137,7 @@ export default function BookingForm({ id, tone = "light" }) {
           value={values.name}
           onChange={onChange}
           autoComplete="name"
-          className={`${field} h-10 w-full`}
+          className={`${field} h-10 w-full min-[500px]:max-sm:rounded-t-[2rem] sm:rounded-tl-[2rem] md:rounded-tl-[2.5rem] lg:rounded-none`}
           placeholder="Full name"
         />
 
@@ -157,7 +157,7 @@ export default function BookingForm({ id, tone = "light" }) {
           value={values.phone}
           onChange={onChange}
           autoComplete="tel"
-          className={`${field} h-10 w-full`}
+          className={`${field} h-10 w-full sm:rounded-tr-[2rem] md:rounded-tr-[2.5rem] lg:rounded-none`}
           placeholder="10-digit mobile number"
         />
 
