@@ -1,5 +1,4 @@
 import BookingForm from "./BookingForm";
-import { VENUE } from "@/data/site";
 
 export default function Hero() {
   return (
@@ -21,6 +20,9 @@ export default function Hero() {
             traditions become{" "}
             <span className="italic text-gold-light">memories</span>.
           </h1>
+          <p className="mt-4 text-sm font-medium tracking-wide text-gold-light">
+            A Wedding &amp; Event Venue in Rajpur Sonarpur
+          </p>
           <p className="mt-5 md:mt-7 max-w-xl text-lg leading-relaxed text-ivory/80">
             From the joy of a wedding to the warmth of a family gathering, Palki
             Garden is where loved ones come together, traditions find their

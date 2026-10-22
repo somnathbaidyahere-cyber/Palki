@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { EVENT_TYPES, MAX_GUESTS } from "@/data/site";
-import Link from "next/link"
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const EMPTY = {
   name: "",
@@ -13,6 +14,9 @@ const EMPTY = {
   guests: "",
   message: "",
 };
+
+const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919XXXXXXXXX";
 
 export default function BookingForm({ id, tone = "light" }) {
   const [values, setValues] = useState(EMPTY);
@@ -53,6 +57,28 @@ export default function BookingForm({ id, tone = "light" }) {
     return e;
   }
 
+  function buildWhatsAppFallback(values) {
+    const phone = WHATSAPP_NUMBER.replace(/\D/g, "");
+
+    if (!/^91[6-9]\d{9}$/.test(phone)) {
+      return "#";
+    }
+
+    const message = [
+      "Hello Palki Garden! I'd like to enquire about booking.",
+      "",
+      `Name: ${values.name.trim()}`,
+      `Phone: ${values.phone.trim()}`,
+      `Email: ${values.email.trim() || "Not provided"}`,
+      `Event type: ${values.type}`,
+      `Preferred date: ${values.date}`,
+      `Expected guests: ${values.guests}`,
+      `Message: ${values.message.trim() || "Not provided"}`,
+    ].join("\n");
+
+    return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  }
+
   async function onSubmit(ev) {
     ev.preventDefault();
 
@@ -64,32 +90,44 @@ export default function BookingForm({ id, tone = "light" }) {
     setStatus("sending");
 
     try {
-      // Replace this with Palki Garden's WhatsApp business number.
-      // Include the country code, without +, spaces, or dashes.
-      const whatsappNumber = "91XXXXXXXXXX";
+      const formData = new FormData();
 
-      const message = [
-        "Hello Palki Garden! I'd like to enquire about hosting an event.",
-        "",
-        `Name: ${values.name}`,
-        `Phone: ${values.phone}`,
-        `Event Type: ${values.type}`,
-        `Preferred Date: ${values.date}`,
-        `Expected Guests: ${values.guests}`,
-        values.email ? `Email: ${values.email}` : "",
-        values.message ? `Additional Details: ${values.message}` : "",
-        "",
-        "Please let me know about availability and booking details.",
-      ]
-        .filter(Boolean)
-        .join("\n");
+      // Add the existing form values
+      formData.append("name", values.name.trim());
+      formData.append("phone", values.phone.trim());
+      formData.append("email", values.email.trim());
+      formData.append("type", values.type);
+      formData.append("date", values.date);
+      formData.append("guests", values.guests);
+      formData.append("message", values.message.trim());
 
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      // Web3Forms configuration
+      formData.append(
+        "access_key",
+        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KE,
+      );
+      formData.append(
+        "subject",
+        `New Palki Garden Enquiry — ${values.name.trim()}`,
+      );
+      formData.append("from_name", "Palki Garden Website");
 
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error("Unable to submit enquiry");
+      }
 
       setStatus("done");
-    } catch {
+      setValues(EMPTY);
+      setErrors({});
+    } catch (error) {
+      console.error("Booking enquiry submission failed:", error);
       setStatus("error");
     }
   }
@@ -103,12 +141,10 @@ export default function BookingForm({ id, tone = "light" }) {
         <p className="font-display text-3xl font-semibold">
           Thank you. We have your request.
         </p>
-        {status === "done" && (
-          <p role="status" className="mt-4 text-sm text-green-700">
-            WhatsApp is opening with your enquiry. Please press Send in WhatsApp
-            to share your details with Palki Garden.
-          </p>
-        )}
+        <p className={`mt-4 text-sm ${dark ? "text-ivory/70" : "text-ink/70"}`}>
+          Your enquiry has been sent successfully. Our team will contact you
+          soon.
+        </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
@@ -265,19 +301,60 @@ export default function BookingForm({ id, tone = "light" }) {
       </div>
 
       {/* Submit */}
-     <div className="sm:col-span-2">
-        <button type="submit" disabled={status === "sending"} className="btn-gold w-full disabled:opacity-60">
+      <div className="sm:col-span-2">
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="btn-gold w-full disabled:opacity-60"
+        >
           {status === "sending" ? "Sending..." : "Check availability"}
         </button>
-        <p className={`mt-3 text-center text-sm ${dark ? "text-ivory/60" : "text-ink/60"}`}>
+        <p
+          className={`mt-3 text-center text-sm ${dark ? "text-ivory/60" : "text-ink/60"}`}
+        >
           By sending this, you agree to our{" "}
-          <Link href="/privacy-policy" className="underline decoration-gold underline-offset-4">Privacy Policy</Link> and{" "}
-          <Link href="/terms-and-conditions" className="underline decoration-gold underline-offset-4">Terms</Link>.
+          <Link
+            href="/privacy-policy"
+            className="underline decoration-gold underline-offset-4"
+          >
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link
+            href="/terms-and-conditions"
+            className="underline decoration-gold underline-offset-4"
+          >
+            Terms
+          </Link>
+          .
         </p>
         {status === "error" && (
-          <p role="alert" className={`mt-3 text-center ${errorText}`}>
-            We could not send your request. Please try again or call us.
-          </p>
+          <div className="mt-4 text-center">
+            <p role="alert" className={errorText}>
+              We couldn't submit your enquiry through the email form. You can
+              send it directly through WhatsApp instead.
+            </p>
+
+            <a
+              href={buildWhatsAppFallback(values)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                if (
+                  !/^91[6-9]\d{9}$/.test(WHATSAPP_NUMBER.replace(/\D/g, ""))
+                ) {
+                  e.preventDefault();
+                  alert(
+                    "WhatsApp enquiry is temporarily unavailable. Please contact us directly.",
+                  );
+                }
+              }}
+              className="mt-4 inline-flex items-center justify-center gap-2 rounded-full border border-emerald-500/70 px-5 py-3 text-sm font-medium text-emerald-500 transition-colors hover:border-gold hover:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
+            >
+              Continue on WhatsApp
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
         )}
       </div>
     </form>

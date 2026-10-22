@@ -1,6 +1,6 @@
 import {
   Maximize2, Users, Snowflake, Landmark, ChefHat,
-  ShieldCheck, ParkingCircle, Sparkles, BedDouble,
+  ShieldCheck, ParkingCircle, Sparkles, BedDouble,Train
 } from "lucide-react";
 
 const ICONS = {
@@ -11,7 +11,7 @@ const ICONS = {
   kitchen: ChefHat,
   fire: ShieldCheck,
   parking: ParkingCircle,
-  decor: Sparkles,
+  train: Train,
   rooms: BedDouble,
 };
 

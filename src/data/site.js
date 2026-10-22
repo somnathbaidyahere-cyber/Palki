@@ -1,5 +1,11 @@
 // Single place to edit all venue content. Components only render what's here.
 
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.com"
+).replace(/\/+$/, "");
+
+export const TELEPHONE = process.env.NEXT_PUBLIC_TELEPHONE;
+
 export const VENUE = {
   name: "Palki Garden",
   tagline: "Celebrations, carried with care.",
@@ -29,24 +35,72 @@ export const EVENT_TYPES = [
   "Other",
 ];
 
-export const MAX_GUESTS = 700;
+export const MAX_GUESTS = 800;
 
 export const FEATURES = [
-  { icon: "area", title: "5,000 sq ft hall", text: "One generous, uninterrupted space for the ceremony, the feast and the dancing." },
-  { icon: "guests", title: "Seats up to 700", text: "Comfortable for large family gatherings without losing the warmth of a smaller one." },
-  { icon: "ac", title: "Fully air-conditioned", text: "Guests stay cool through long afternoons and crowded evenings." },
-  { icon: "stage", title: "400–500 sq ft stage area", text: "A wide stage for mandap, rituals, performances and family portraits." },
-  { icon: "kitchen", title: "Dedicated kitchen", text: "Built for large-scale catering, with safety measures and backup in place." },
-  { icon: "fire", title: "Fire safety", text: "Safety equipment and clear exits, so you can celebrate without worry." },
-  { icon: "parking", title: "Parking lot", text: "A small private lot for family, elders and the first cars to arrive." },
-  { icon: "decor", title: "Custom decoration", text: "Florals, drapes and lighting designed around your family's traditions." },
-  { icon: "rooms", title: "4–5 guest rooms", text: "Rooms on site for the couple, parents and relatives travelling in." },
+  {
+    icon: "area",
+    title: "5,000 sq ft hall",
+    text: "One generous, uninterrupted space for the ceremony, the feast and the dancing.",
+  },
+  {
+    icon: "guests",
+    title: "Seats up to 800",
+    text: "Comfortable for large family gatherings without losing the warmth of a smaller one.",
+  },
+  {
+    icon: "ac",
+    title: "Fully air-conditioned",
+    text: "Guests stay cool through long afternoons and crowded evenings.",
+  },
+  {
+    icon: "stage",
+    title: "400–500 sq ft stage area",
+    text: "A wide stage for mandap, rituals, performances and family portraits.",
+  },
+  {
+    icon: "kitchen",
+    title: "Dedicated kitchen",
+    text: "Built for large-scale catering, with safety measures and backup in place.",
+  },
+  {
+    icon: "fire",
+    title: "Fire safety",
+    text: "Safety equipment and clear exits, so you can celebrate without worry.",
+  },
+  {
+    icon: "parking",
+    title: "Parking lot",
+    text: "A small private lot for family, elders and the first cars to arrive.",
+  },
+  {
+    icon: "train",
+    title: "Easy to reach",
+    text: "Just a 10-minute walk from Subhasgram Railway Station, making travel convenient for your guests.",
+  },
+  {
+    icon: "rooms",
+    title: "4–5 guest rooms",
+    text: "Rooms on site for the couple, parents and relatives travelling in.",
+  },
 ];
 
 export const ROOMS = [
-  { title: "Bridal and groom's rooms", text: "A quiet place to dress, rest and prepare before the ceremony.", image: "/images/room-1.svg" },
-  { title: "Family rooms", text: "Space for parents and close relatives to stay together on the venue.", image: "/images/room-2.svg" },
-  { title: "Guest rooms", text: "Comfortable rooms for elders and out-of-town guests.", image: "/images/room-3.svg" },
+  {
+    title: "Bridal and groom's rooms",
+    text: "A quiet place to dress, rest and prepare before the ceremony.",
+    image: "/images/room-1.svg",
+  },
+  {
+    title: "Family rooms",
+    text: "Space for parents and close relatives to stay together on the venue.",
+    image: "/images/room-2.svg",
+  },
+  {
+    title: "Guest rooms",
+    text: "Comfortable rooms for elders and out-of-town guests.",
+    image: "/images/room-3.svg",
+  },
 ];
 
 export const GALLERY = [
@@ -62,7 +116,22 @@ export const GALLERY = [
 
 // Drop your video files into /public/videos and posters into /public/images.
 export const TESTIMONIALS = [
-  { name: "Ananya and Rohit", event: "Wedding", video: "/videos/testimonial-1.mp4", poster: "/images/testimonial-1.svg" },
-  { name: "The Sharma family", event: "Reception", video: "/videos/testimonial-2.mp4", poster: "/images/testimonial-2.svg" },
-  { name: "Meera Iyer", event: "50th anniversary", video: "/videos/testimonial-3.mp4", poster: "/images/testimonial-3.svg" },
+  {
+    name: "Ananya and Rohit",
+    event: "Wedding",
+    video: "/videos/testimonial-1.mp4",
+    poster: "/images/testimonial-1.svg",
+  },
+  {
+    name: "The Sharma family",
+    event: "Reception",
+    video: "/videos/testimonial-2.mp4",
+    poster: "/images/testimonial-2.svg",
+  },
+  {
+    name: "Meera Iyer",
+    event: "50th anniversary",
+    video: "/videos/testimonial-3.mp4",
+    poster: "/images/testimonial-3.svg",
+  },
 ];
