@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { EVENT_TYPES, MAX_GUESTS } from "@/data/site";
+import Link from "next/link"
 
 const EMPTY = {
   name: "",
@@ -264,17 +265,17 @@ export default function BookingForm({ id, tone = "light" }) {
       </div>
 
       {/* Submit */}
-      <div className="sm:col-span-2">
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="btn-gold min-h-10 w-full disabled:opacity-60"
-        >
+     <div className="sm:col-span-2">
+        <button type="submit" disabled={status === "sending"} className="btn-gold w-full disabled:opacity-60">
           {status === "sending" ? "Sending..." : "Check availability"}
         </button>
-
+        <p className={`mt-3 text-center text-sm ${dark ? "text-ivory/60" : "text-ink/60"}`}>
+          By sending this, you agree to our{" "}
+          <Link href="/privacy-policy" className="underline decoration-gold underline-offset-4">Privacy Policy</Link> and{" "}
+          <Link href="/terms-and-conditions" className="underline decoration-gold underline-offset-4">Terms</Link>.
+        </p>
         {status === "error" && (
-          <p role="alert" className={`mt-2 text-center ${errorText}`}>
+          <p role="alert" className={`mt-3 text-center ${errorText}`}>
             We could not send your request. Please try again or call us.
           </p>
         )}

@@ -11,12 +11,12 @@ export const VENUE = {
 };
 
 export const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Features", href: "#features" },
-  { label: "Stay", href: "#stay" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Stories", href: "#stories" },
-  { label: "Visit", href: "#visit" },
+  { label: "About", href: "/#about" },
+  { label: "Features", href: "/#features" },
+  { label: "Stay", href: "/#stay" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Stories", href: "/#stories" },
+  { label: "Visit", href: "/#visit" },
 ];
 
 export const EVENT_TYPES = [

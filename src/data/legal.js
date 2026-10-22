@@ -57,7 +57,9 @@ export const PRIVACY = {
     },
     {
       title: "8. Contact Us",
-      body: ["For questions or requests concerning your personal information, please contact:"],
+      body: [
+        "For questions or requests concerning your personal information, please contact:",
+      ],
       contact: true,
     },
   ],
@@ -108,8 +110,8 @@ export const TERMS = {
     {
       title: "6. Third-Party Services and Website Availability",
       body: [
-        "Our website may include external links or third-party features, such as Google Maps. We do not control independent services and are not responsible for their content, privacy practices, or availability.",
-        "We aim to maintain an accessible website but cannot guarantee uninterrupted or error-free operation. We may modify or update website content and functionality when necessary.",
+        "Our website may use third-party services such as Google Maps and WhatsApp to help visitors locate our venue and contact us. Your use of these services is subject to their respective terms and privacy policies.",
+        "We do not control these services or their availability. We aim to keep our website accessible but cannot guarantee uninterrupted or error-free operation. We may update website content and functionality when necessary.",
       ],
     },
     {

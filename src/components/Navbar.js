@@ -19,41 +19,55 @@ export default function Navbar() {
 
   const solid = scrolled || open;
 
-  useEffect(() => {
-    const updateActiveSection = () => {
-      // Activation line: 30% down the viewport.
-      const activationPoint = window.innerHeight * 0.3;
+useEffect(() => {
+  // Homepage sections exist only on the homepage.
+  if (window.location.pathname !== "/") {
+    setActiveSection("");
+    return;
+  }
 
-      let currentSection = "";
+  const updateActiveSection = () => {
+    // Activation line: 30% down the viewport.
+    const activationPoint = window.innerHeight * 0.3;
 
-      for (const link of NAV_LINKS) {
-        const section = document.querySelector(link.href);
+    let currentSection = "";
 
-        if (!section) continue;
+    for (const link of NAV_LINKS) {
+      // Extract "#about" from "/#about".
+      const targetId = new URL(
+        link.href,
+        window.location.origin,
+      ).hash.slice(1);
 
-        const rect = section.getBoundingClientRect();
+      if (!targetId) continue;
 
-        if (rect.top <= activationPoint) {
-          currentSection = link.href;
-        }
+      const section = document.getElementById(targetId);
+
+      if (!section) continue;
+
+      const rect = section.getBoundingClientRect();
+
+      if (rect.top <= activationPoint) {
+        currentSection = link.href;
       }
+    }
 
-      setActiveSection(currentSection);
-    };
+    setActiveSection(currentSection);
+  };
 
-    updateActiveSection();
+  updateActiveSection();
 
-    window.addEventListener("scroll", updateActiveSection, {
-      passive: true,
-    });
+  window.addEventListener("scroll", updateActiveSection, {
+    passive: true,
+  });
 
-    window.addEventListener("resize", updateActiveSection);
+  window.addEventListener("resize", updateActiveSection);
 
-    return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
-    };
-  }, []);
+  return () => {
+    window.removeEventListener("scroll", updateActiveSection);
+    window.removeEventListener("resize", updateActiveSection);
+  };
+}, []);
 
   return (
     <header
