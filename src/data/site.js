@@ -13,8 +13,10 @@ export const VENUE = {
   phone: TELEPHONE,
   email: EMAIL,
   // Edit this line and the map + directions button update automatically.
-  address: "Live Happily Karate Academy, CC5P+WFH, Subhasgram Station Rd, Subhasgram, Kolkata, Rajpur Sonarpur, West Bengal 700147",
+  address: "Palki Garden, CC5P+RG8, Janaki Nath Basu Rd, Kodalla, Subhasgram, Rajpur Sonarpur, West Bengal 700147",
   hours: "Open daily, 10 am to 8 pm for visits",
+  instagram: "https://www.instagram.com/your_actual_profile/",
+  facebook: "https://www.facebook.com/your_actual_page/",
 };
 
 export const NAV_LINKS = [
