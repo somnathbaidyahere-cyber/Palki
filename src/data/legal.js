@@ -87,10 +87,10 @@ export const TERMS = {
       ],
     },
     {
-      title: "3. Pricing and Payments",
+      title: "3. Pricing, Payments and Discounts",
       body: [
-        "Prices or packages displayed on the website, where applicable, are for general information unless expressly stated otherwise. Final pricing and payment terms will be confirmed through the booking process.",
-        "Unless an online payment facility is expressly provided, the website should not be treated as a payment portal. Please verify payment instructions and arrangements directly with an authorised representative.",
+        "Prices and payment terms will be confirmed during booking. Any promotional discount applies only to a successfully confirmed booking and is non-transferable, redeemable only by the original customer, and may not be shared with or used by a third party.",
+        "Unless expressly provided, the website is not a payment portal. Verify payment instructions directly with an authorised representative.",
       ],
     },
     {

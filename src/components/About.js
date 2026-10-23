@@ -23,7 +23,7 @@ export default function About() {
               looked after from the moment they arrive.
             </p>
             <p>
-              The hall is large enough for 700 guests and still feels personal.
+              The hall is large enough for 800 guests and still feels personal.
               A dedicated kitchen keeps the feast on schedule, rooms on site
               give the family somewhere to rest, and our team designs the décor
               around your rituals, not a fixed catalogue.

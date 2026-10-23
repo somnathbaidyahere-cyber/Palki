@@ -5,15 +5,18 @@ export const SITE_URL = (
 ).replace(/\/+$/, "");
 
 export const TELEPHONE = process.env.NEXT_PUBLIC_TELEPHONE;
+export const EMAIL = process.env.NEXT_PUBLIC_EMAIL
 
 export const VENUE = {
   name: "Palki Garden",
   tagline: "Celebrations, carried with care.",
-  phone: "+91 00000 00000",
-  email: "bookings@palki.example",
+  phone: TELEPHONE,
+  email: EMAIL,
   // Edit this line and the map + directions button update automatically.
-  address: "CC6P+2C5 Rajpur Sonarpur, West Bengal",
+  address: "Palki Garden, CC5P+RG8, Janaki Nath Basu Rd, Kodalla, Subhasgram, Rajpur Sonarpur, West Bengal 700147",
   hours: "Open daily, 10 am to 8 pm for visits",
+  instagram: "https://www.instagram.com/your_actual_profile/",
+  facebook: "https://www.facebook.com/your_actual_page/",
 };
 
 export const NAV_LINKS = [

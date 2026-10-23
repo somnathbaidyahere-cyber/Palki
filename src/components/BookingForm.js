@@ -3,7 +3,10 @@
 import { useState } from "react";
 import { EVENT_TYPES, MAX_GUESTS } from "@/data/site";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { generateDiscountCode } from "@/lib/discount";
+
+import DiscountSuccessNotice from "@/components/booking/DiscountSuccessNotice";
+import WhatsAppFallback from "@/components/booking/WhatsAppFallback";
 
 const EMPTY = {
   name: "",
@@ -15,13 +18,11 @@ const EMPTY = {
   message: "",
 };
 
-const WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919XXXXXXXXX";
-
 export default function BookingForm({ id, tone = "light" }) {
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | done | error
+  const [discountCode, setDiscountCode] = useState("");
 
   const dark = tone === "dark";
   const today = new Date().toISOString().split("T")[0];
@@ -57,28 +58,6 @@ export default function BookingForm({ id, tone = "light" }) {
     return e;
   }
 
-  function buildWhatsAppFallback(values) {
-    const phone = WHATSAPP_NUMBER.replace(/\D/g, "");
-
-    if (!/^91[6-9]\d{9}$/.test(phone)) {
-      return "#";
-    }
-
-    const message = [
-      "Hello Palki Garden! I'd like to enquire about booking.",
-      "",
-      `Name: ${values.name.trim()}`,
-      `Phone: ${values.phone.trim()}`,
-      `Email: ${values.email.trim() || "Not provided"}`,
-      `Event type: ${values.type}`,
-      `Preferred date: ${values.date}`,
-      `Expected guests: ${values.guests}`,
-      `Message: ${values.message.trim() || "Not provided"}`,
-    ].join("\n");
-
-    return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  }
-
   async function onSubmit(ev) {
     ev.preventDefault();
 
@@ -87,12 +66,15 @@ export default function BookingForm({ id, tone = "light" }) {
 
     if (Object.keys(e).length) return;
 
+    // Generate one code for this submission.
+    const code = generateDiscountCode();
+
     setStatus("sending");
 
     try {
       const formData = new FormData();
 
-      // Add the existing form values
+      // Existing booking details
       formData.append("name", values.name.trim());
       formData.append("phone", values.phone.trim());
       formData.append("email", values.email.trim());
@@ -101,14 +83,21 @@ export default function BookingForm({ id, tone = "light" }) {
       formData.append("guests", values.guests);
       formData.append("message", values.message.trim());
 
+      // Discount voucher details
+      formData.append("Discount Code", code);
+      formData.append(
+        "Discount Offer",
+        "5% discount on a successfully confirmed eligible booking. Verify and mark the code as redeemed manually.",
+      );
+
       // Web3Forms configuration
       formData.append(
         "access_key",
-        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KE,
+        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
       );
       formData.append(
         "subject",
-        `New Palki Garden Enquiry — ${values.name.trim()}`,
+        `New Palki Garden Enquiry — ${values.name.trim()} — Voucher ${code}`,
       );
       formData.append("from_name", "Palki Garden Website");
 
@@ -120,9 +109,11 @@ export default function BookingForm({ id, tone = "light" }) {
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error("Unable to submit enquiry");
+        throw new Error(result.message || "Unable to submit enquiry");
       }
 
+      // Show the exact code sent to the receptionist.
+      setDiscountCode(code);
       setStatus("done");
       setValues(EMPTY);
       setErrors({});
@@ -132,27 +123,17 @@ export default function BookingForm({ id, tone = "light" }) {
     }
   }
 
-  if (status === "done") {
+  if (status === "done" && discountCode) {
     return (
-      <div
-        role="status"
-        className={`py-10 text-center ${dark ? "text-ivory" : "text-maroon"}`}
-      >
-        <p className="font-display text-3xl font-semibold">
-          Thank you. We have your request.
-        </p>
-        <p className={`mt-4 text-sm ${dark ? "text-ivory/70" : "text-ink/70"}`}>
-          Your enquiry has been sent successfully. Our team will contact you
-          soon.
-        </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-6 text-gold underline underline-offset-4"
-        >
-          Send another request
-        </button>
-      </div>
+      <DiscountSuccessNotice
+        discountCode={discountCode}
+        onDone={() => {
+          setValues(EMPTY);
+          setErrors({});
+          setDiscountCode("");
+          setStatus("idle");
+        }}
+      />
     );
   }
 
@@ -328,34 +309,7 @@ export default function BookingForm({ id, tone = "light" }) {
           </Link>
           .
         </p>
-        {status === "error" && (
-          <div className="mt-4 text-center">
-            <p role="alert" className={errorText}>
-              We couldn't submit your enquiry through the email form. You can
-              send it directly through WhatsApp instead.
-            </p>
-
-            <a
-              href={buildWhatsAppFallback(values)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                if (
-                  !/^91[6-9]\d{9}$/.test(WHATSAPP_NUMBER.replace(/\D/g, ""))
-                ) {
-                  e.preventDefault();
-                  alert(
-                    "WhatsApp enquiry is temporarily unavailable. Please contact us directly.",
-                  );
-                }
-              }}
-              className="mt-4 inline-flex items-center justify-center gap-2 rounded-full border border-emerald-500/70 px-5 py-3 text-sm font-medium text-emerald-500 transition-colors hover:border-gold hover:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
-            >
-              Continue on WhatsApp
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
-        )}
+        {status === "error" && <WhatsAppFallback values={values} />}
       </div>
     </form>
   );

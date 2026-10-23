@@ -1,19 +1,102 @@
+
+import {
+  MessageCircle,
+  Mail,
+  Phone,
+} from "lucide-react";
+import { FaInstagram, FaFacebookF } from "react-icons/fa";
 import { NAV_LINKS, VENUE } from "@/data/site";
 import Ornament from "./ui/Ornament";
 import Link from "next/link";
 
+const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+
+const CONTACT_LINKS = [
+  {
+    label: "WhatsApp",
+    href: WHATSAPP_NUMBER
+      ? `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, "")}?text=${encodeURIComponent("Hi palki Garden, I have a query!")}`
+      : null,
+    Icon: MessageCircle,
+  },
+  {
+    label: "Email",
+    href: VENUE.email ? `mailto:${VENUE.email}` : null,
+    Icon: Mail,
+  },
+  {
+    label: "Call",
+    href: VENUE.phone
+      ? `tel:${VENUE.phone.replace(/[^\d+]/g, "")}`
+      : null,
+    Icon: Phone,
+  },
+  {
+    label: "Instagram",
+    href: VENUE.instagram || null,
+    Icon: FaInstagram,
+  },
+  {
+    label: "Facebook",
+    href: VENUE.facebook || null,
+    Icon: FaFacebookF,
+  },
+];
+
 export default function Footer() {
   return (
-    <footer className="bg-maroon-deep px-5 sm:px-0 py-14 text-center text-ivory/75">
-      <p className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold text-gold-light">
+    <footer className="bg-maroon-deep px-5 py-12 text-center text-ivory/75 sm:py-14">
+      <p className="font-display text-2xl font-semibold text-gold-light md:text-3xl lg:text-4xl">
         {VENUE.name}
       </p>
+
       <p className="mt-1">{VENUE.tagline}</p>
+
+      {/* Contact and social links */}
+      <ul
+        aria-label="Contact and social media"
+        className="mt-6 flex flex-wrap items-center justify-center gap-3"
+      >
+        {CONTACT_LINKS.filter((item) => item.href).map(
+          ({ label, href, Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target={
+                  label === "WhatsApp" ||
+                  label === "Instagram" ||
+                  label === "Facebook"
+                    ? "_blank"
+                    : undefined
+                }
+                rel={
+                  label === "WhatsApp" ||
+                  label === "Instagram" ||
+                  label === "Facebook"
+                    ? "noopener noreferrer"
+                    : undefined
+                }
+                aria-label={label}
+                title={label}
+                className="group flex size-10 items-center justify-center rounded-full border border-gold-light/30 text-gold-light transition-all duration-300 hover:border-gold-light hover:bg-gold-light hover:text-maroon-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-maroon-deep sm:size-11"
+              >
+                <Icon className="size-[17px] transition-transform duration-300 group-hover:scale-110 sm:size-[18px]" />
+              </a>
+            </li>
+          )
+        )}
+      </ul>
+
       <Ornament className="my-6" />
+
       <ul className="flex flex-wrap justify-center gap-x-7 gap-y-2">
         {NAV_LINKS.map((l) => (
           <li key={l.href}>
-            <a href={l.href} className="text-sm md:text-base transition hover:text-gold-light">
+            <a
+              href={l.href}
+              className="text-sm transition hover:text-gold-light md:text-base"
+            >
               {l.label}
             </a>
           </li>
@@ -47,6 +130,7 @@ export default function Footer() {
           </Link>
         </li>
       </ul>
+
       <p className="mt-4 text-sm text-ivory/50">
         © {new Date().getFullYear()} {VENUE.name}. All rights reserved.
       </p>
