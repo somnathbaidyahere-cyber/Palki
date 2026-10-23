@@ -92,17 +92,17 @@ export const ROOMS = [
   {
     title: "Bridal and groom's rooms",
     text: "A quiet place to dress, rest and prepare before the ceremony.",
-    image: "/images/room-1.svg",
+    image: "/images/bridal-room.jpg",
   },
   {
     title: "Family rooms",
     text: "Space for parents and close relatives to stay together on the venue.",
-    image: "/images/room-2.svg",
+    image: "/images/family-room.jpg",
   },
   {
     title: "Guest rooms",
     text: "Comfortable rooms for elders and out-of-town guests.",
-    image: "/images/room-3.svg",
+    image: "/images/guest-room.jpg",
   },
 ];
 
