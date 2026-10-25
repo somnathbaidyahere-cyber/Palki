@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-export default function DiscountSuccessNotice({ discountCode, onDone }) {
+export default function DiscountSuccessNotice({ discountCode, onDone, onRevealChange }) {
   const [copied, setCopied] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
 
@@ -17,7 +17,7 @@ export default function DiscountSuccessNotice({ discountCode, onDone }) {
     }
   }
 
- // Trigger reveal animation sequence
+  // Trigger reveal animation sequence
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsRevealed(true);
@@ -26,38 +26,43 @@ export default function DiscountSuccessNotice({ discountCode, onDone }) {
     return () => clearTimeout(timer);
   }, []);
 
+  // Passing a boolean prop upward for animating the hero section
+  useEffect(() => {
+    onRevealChange?.(isRevealed);
+  }, [isRevealed, onRevealChange]);
+
   return (
-   <div
+    <div
       role="status"
       aria-labelledby="discount-success-title"
       className="relative overflow-hidden rounded-2xl border border-gold-light/60 bg-maroon-deep p-5 text-ivory shadow-2xl sm:p-6 shadow-gold/15 max-w-md mx-auto"
     >
       {/* 1. Regal Ribbon Cutting Stage */}
       <div
-        className="absolute inset-0 z-40 pointer-events-none flex items-center justify-center overflow-hidden"
         aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-40 flex items-center justify-center overflow-hidden"
       >
-        {/* Left Ribbon Strap */}
+        {/* Left ribbon strap */}
         <div
-          className={`absolute top-1/2 left-0 h-8 -translate-y-1/2 bg-gradient-to-r from-gold via-gold-light to-gold shadow-lg border-y border-gold-light/80 transition-all duration-700 ease-in-out ${
-            isRevealed ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"
+          className={`absolute left-0 top-1/2 h-8 w-1/2 -translate-y-1/2 border-y border-gold-light/80 bg-gradient-to-r from-gold via-gold-light to-gold shadow-lg ${
+            isRevealed ? "animate-ribbon-cut-left" : ""
           }`}
         />
 
-        {/* Right Ribbon Strap */}
+        {/* Right ribbon strap */}
         <div
-          className={`absolute top-1/2 right-0 h-8 -translate-y-1/2 bg-gradient-to-r from-gold via-gold-light to-gold shadow-lg border-y border-gold-light/80 transition-all duration-700 ease-in-out ${
-            isRevealed ? "translate-x-full opacity-0" : "translate-x-0 opacity-100"
+          className={`absolute right-0 top-1/2 h-8 w-1/2 -translate-y-1/2 border-y border-gold-light/80 bg-gradient-to-r from-gold via-gold-light to-gold shadow-lg ${
+            isRevealed ? "animate-ribbon-cut-right" : ""
           }`}
         />
 
-        {/* Golden Ribbon Bow in Center */}
+        {/* Center bow */}
         <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center transition-all duration-500 ${
-            isRevealed ? "scale-150 opacity-0" : "scale-100 opacity-100"
+          className={`absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center ${
+            isRevealed ? "animate-bow-pop" : ""
           }`}
         >
-          <div className="h-10 w-10 rounded-full bg-gold-light border-2 border-gold shadow-xl flex items-center justify-center text-maroon-deep font-bold text-xs">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gold bg-gold-light text-xs font-bold text-maroon-deep shadow-xl">
             ✨
           </div>
         </div>
@@ -70,14 +75,20 @@ export default function DiscountSuccessNotice({ discountCode, onDone }) {
         }`}
       />
 
-      {/* 3. Continuous Falling Flower Petals */}
+      {/* 3. Falling Flower Petals */}
       <div
-        className="absolute inset-0 pointer-events-none overflow-hidden z-10"
+        className={`absolute inset-0 z-10 overflow-hidden pointer-events-none
+    transition-all duration-700 ease-out
+    ${isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
         aria-hidden="true"
       >
         <span
           className="absolute animate-fall text-xs opacity-50"
-          style={{ left: "15%", animationDuration: "4.2s", animationDelay: "0.2s" }}
+          style={{
+            left: "15%",
+            animationDuration: "4.2s",
+            animationDelay: "0.2s",
+          }}
         >
           🌸
         </span>
@@ -89,59 +100,87 @@ export default function DiscountSuccessNotice({ discountCode, onDone }) {
         </span>
         <span
           className="absolute animate-fall text-xs opacity-45"
-          style={{ left: "72%", animationDuration: "4.6s", animationDelay: "0.5s" }}
+          style={{
+            left: "72%",
+            animationDuration: "4.6s",
+            animationDelay: "0.5s",
+          }}
         >
           🌸
         </span>
         <span
           className="absolute animate-fall text-xs opacity-35"
-          style={{ left: "28%", animationDuration: "5.8s", animationDelay: "1.8s" }}
+          style={{
+            left: "28%",
+            animationDuration: "5.8s",
+            animationDelay: "1.8s",
+          }}
         >
           🌼
         </span>
         <span
           className="absolute animate-fall text-xs opacity-40"
-          style={{ left: "88%", animationDuration: "5.1s", animationDelay: "1.4s" }}
+          style={{
+            left: "88%",
+            animationDuration: "5.1s",
+            animationDelay: "1.4s",
+          }}
         >
           🌸
         </span>
       </div>
 
-  {/* 4. Large Floating Balloons (Starting from bottom and floating over card & navbar) */}
-<div
-  className="absolute inset-0 pointer-events-none z-50 overflow-visible"
-  aria-hidden="true"
->
-  <span
-    className="absolute bottom-0 animate-float-bottom-up text-4xl sm:text-5xl opacity-90"
-    style={{ left: "8%", animationDuration: "5.5s", animationDelay: "0s" }}
-  >
-    🎈
-  </span>
-  <span
-    className="absolute bottom-0 animate-float-bottom-up text-5xl sm:text-6xl opacity-85"
-    style={{ left: "32%", animationDuration: "7s", animationDelay: "1s" }}
-  >
-    🎈
-  </span>
-  <span
-    className="absolute bottom-0 animate-float-bottom-up text-4xl sm:text-5xl opacity-90"
-    style={{ left: "62%", animationDuration: "5s", animationDelay: "0.4s" }}
-  >
-    🎈
-  </span>
-  <span
-    className="absolute bottom-0 animate-float-bottom-up text-5xl sm:text-6xl opacity-80"
-    style={{ left: "84%", animationDuration: "7.5s", animationDelay: "1.5s" }}
-  >
-    🎈
-  </span>
-</div>
+      {/* 3. Falling Flower Petals */}
+      <div
+        className={`absolute inset-0 z-10 overflow-hidden pointer-events-none
+    transition-all duration-700 ease-out
+    ${isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
+        aria-hidden="true"
+      >
+        <span
+          className="absolute bottom-0 animate-float-bottom-up text-4xl sm:text-5xl opacity-90"
+          style={{
+            left: "8%",
+            animationDuration: "5.5s",
+            animationDelay: "0s",
+          }}
+        >
+          🎈
+        </span>
+        <span
+          className="absolute bottom-0 animate-float-bottom-up text-5xl sm:text-6xl opacity-85"
+          style={{ left: "32%", animationDuration: "7s", animationDelay: "1s" }}
+        >
+          🎈
+        </span>
+        <span
+          className="absolute bottom-0 animate-float-bottom-up text-4xl sm:text-5xl opacity-90"
+          style={{
+            left: "62%",
+            animationDuration: "5s",
+            animationDelay: "0.4s",
+          }}
+        >
+          🎈
+        </span>
+        <span
+          className="absolute bottom-0 animate-float-bottom-up text-5xl sm:text-6xl opacity-80"
+          style={{
+            left: "84%",
+            animationDuration: "7.5s",
+            animationDelay: "1.5s",
+          }}
+        >
+          🎈
+        </span>
+      </div>
 
       {/* 5. Main Modal Content - Fades into view as ribbon reveals */}
       <div
         className={`relative z-20 transition-all duration-700 ease-out transform ${
-          isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-2"
+          isRevealed
+            ? "opacity-100 scale-100 translate-y-0"
+            : "opacity-0 scale-95 translate-y-2"
         }`}
       >
         {/* Subtle background glow */}
@@ -161,8 +200,9 @@ export default function DiscountSuccessNotice({ discountCode, onDone }) {
         </h3>
 
         <p className="mt-2 text-sm leading-relaxed text-ivory/80">
-          Thank you for considering Palki Garden. Enjoy{" "}
-          <strong className="text-gold-light font-bold">5% off</strong> your eligible booking with the voucher below.
+          Thank you for choosing Palki Garden. Enjoy{" "}
+          <strong className="text-gold-light font-bold">5% off</strong>an
+          eligible booking with your exclusive voucher.
         </p>
 
         {/* Voucher Code Box */}
@@ -197,7 +237,11 @@ export default function DiscountSuccessNotice({ discountCode, onDone }) {
                   stroke="currentColor"
                   strokeWidth={2.5}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
                 Code Copied!
               </>
@@ -223,8 +267,14 @@ export default function DiscountSuccessNotice({ discountCode, onDone }) {
         </div>
 
         {/* Terms notice */}
+
         <p className="mt-3 text-xs leading-relaxed text-ivory/60">
-          Keep this code for your booking. The 5% discount applies only to a successfully confirmed eligible booking.{" "}
+          Keep this code for your booking. Valid for{" "}
+          <strong className="font-semibold text-gold-light">
+            72 hours from successful enquiry submission.
+          </strong>{" "}
+          The 5% discount applies only to an eligible, successfully confirmed
+          booking.{" "}
           <Link
             href="/terms-and-conditions"
             className="text-gold-light underline underline-offset-2 transition-colors hover:text-gold"
