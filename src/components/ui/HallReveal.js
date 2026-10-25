@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function HallReveal() {
   const revealRef = useRef(null);
@@ -69,10 +70,14 @@ export default function HallReveal() {
       <div className="hall-reveal__inner arch">
         {/* Hall image behind the doors */}
         <div className="hall-reveal__scene">
-          <img
-            src="/images/about.svg"
+          <Image
+            src="/images/marriage-hall1.jpg"
             alt="The main hall at Palki Garden, ready for a wedding celebration"
+            width={1200}
+            height={900}
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="hall-reveal__image"
+            loading="lazy"
           />
 
           {/* Light escaping from the hall */}

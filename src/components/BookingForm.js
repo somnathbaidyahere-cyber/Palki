@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EVENT_TYPES, MAX_GUESTS } from "@/data/site";
 import Link from "next/link";
 import { generateDiscountCode } from "@/lib/discount";
@@ -18,11 +18,12 @@ const EMPTY = {
   message: "",
 };
 
-export default function BookingForm({ id, tone = "light" }) {
+export default function BookingForm({ id, tone = "light", onRevealChange }) {
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | done | error
   const [discountCode, setDiscountCode] = useState("");
+  const [connectionError, setConnectionError] = useState(null);
 
   const dark = tone === "dark";
   const today = new Date().toISOString().split("T")[0];
@@ -93,7 +94,7 @@ export default function BookingForm({ id, tone = "light" }) {
       // Web3Forms configuration
       formData.append(
         "access_key",
-        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KE,
       );
       formData.append(
         "subject",
@@ -119,9 +120,34 @@ export default function BookingForm({ id, tone = "light" }) {
       setErrors({});
     } catch (error) {
       console.error("Booking enquiry submission failed:", error);
+
+      setConnectionError(!navigator.onLine ? "offline" : "error");
+
       setStatus("error");
     }
   }
+
+  useEffect(() => {
+    function handleOnline() {
+      setConnectionError((current) =>
+        current === "offline" ? "error" : current,
+      );
+    }
+
+    function handleOffline() {
+      if (status === "error") {
+        setConnectionError("offline");
+      }
+    }
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, [status]);
 
   if (status === "done" && discountCode) {
     return (
@@ -132,7 +158,9 @@ export default function BookingForm({ id, tone = "light" }) {
           setErrors({});
           setDiscountCode("");
           setStatus("idle");
+          onRevealChange?.(false);
         }}
+        onRevealChange={onRevealChange}
       />
     );
   }
@@ -309,7 +337,9 @@ export default function BookingForm({ id, tone = "light" }) {
           </Link>
           .
         </p>
-        {status === "error" && <WhatsAppFallback values={values} />}
+        {status === "error" && (
+          <WhatsAppFallback values={values} connectionError={connectionError} />
+        )}
       </div>
     </form>
   );
