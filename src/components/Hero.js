@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import BookingForm from "./BookingForm";
 
 export default function Hero() {
@@ -51,15 +52,18 @@ export default function Hero() {
           ))}
       </div>
 
+      {/* Editorial photo collage — right side of hero */}
+
+     
       {/* Main hero content */}
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="relative z-10 mx-auto grid min-h-[540px] max-w-7xl items-center gap-12 px-5 py-10 sm:px-8 sm:py-14 lg:min-h-[620px] lg:grid-cols-[1fr_0.95fr] lg:gap-8 lg:py-12 xl:gap-14">
         {/* Intro */}
         <div
-          className={`animate-rise hero-celebration-intro ${
+          className={`relative z-10 animate-rise hero-celebration-intro ${
             showCelebration ? "hero-celebration-active" : ""
           }`}
         >
-          <h1 className="text-4xl leading-[1.05] md:text-5xl lg:text-7xl">
+          <h1 className="text-4xl leading-[1.05] md:text-5xl lg:text-6xl xl:text-7xl">
             Where
             <br />
             traditions become{" "}
@@ -70,13 +74,13 @@ export default function Hero() {
             A Wedding &amp; Event Venue in Rajpur Sonarpur
           </p>
 
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ivory/80 md:mt-7">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-ivory/80 md:mt-7 md:text-lg">
             From the joy of a wedding to the warmth of a family gathering, Palki
             Garden is where loved ones come together, traditions find their
             place, and beautiful memories begin.
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
             <a href="#book" className="btn-gold">
               Check availability
             </a>
@@ -86,32 +90,68 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Booking card */}
+        {/* Editorial photo collage */}
         <div
-          id="book-quick"
-          className={`animate-rise mx-auto w-full min-w-0 max-w-3xl transition-[filter] duration-1000 [animation-delay:200ms] ${
+          className={`relative mx-auto h-[390px] w-full max-w-[540px] animate-rise sm:h-[480px] lg:h-[530px] lg:max-w-none [animation-delay:200ms] ${
             showCelebration ? "hero-celebration-card-active" : ""
           }`}
         >
-          <div className="arch w-full min-w-0 border border-gold/50 p-1.5 sm:p-2">
-            <div className="arch w-full min-w-0 bg-maroon/80 px-4 pb-8 pt-16 backdrop-blur min-[430px]:max-sm:px-8 sm:px-12 md:px-16 lg:px-10">
-              <h2 className="text-center text-2xl text-gold-light lg:text-3xl">
-                Plan your date
-              </h2>
+          {/* Soft ambient glow */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-[12%] rounded-full bg-gold-light/[0.09] blur-3xl"
+          />
 
-              <p className="mb-5 mt-2 text-center text-sm text-ivory/70 md:mb-6 md:text-base">
-                Tell us about your event and we will call you back.
-              </p>
+          {/* Back photo — guest room */}
+          <div className="absolute left-[5%] top-[9%] z-0 w-[49%] -rotate-[9deg] transition-transform duration-500 hover:-rotate-[5deg]">
+            <div className="relative aspect-[4/5] bg-[#F8F0DF] p-2.5 pb-9 shadow-[0_22px_55px_rgba(0,0,0,0.4)] sm:p-3 sm:pb-11">
+              <div className="relative aspect-[3/4] overflow-hidden bg-maroon-deep">
+                <Image
+                  src="/images/guest-room.jpg"
+                  alt=""
+                  fill
+                  sizes="(min-width: 1280px) 260px, (min-width: 1024px) 220px, 45vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute -top-2 left-1/2 h-6 w-14 -translate-x-1/2 rotate-[-5deg] bg-[#D9BD80]/85 shadow-sm sm:w-16" />
+            </div>
+          </div>
 
-              <BookingForm
-                id="hero"
-                tone="dark"
-                onRevealChange={setShowCelebration}
-              />
+          {/* Front photo — bridal room */}
+          <div className="absolute right-[4%] top-[5%] z-10 w-[49%] rotate-[7deg] transition-transform duration-500 hover:rotate-[4deg]">
+            <div className="relative aspect-[4/5] bg-[#F8F0DF] p-2.5 pb-9 shadow-[0_25px_65px_rgba(0,0,0,0.45)] sm:p-3 sm:pb-11">
+              <div className="relative aspect-[3/4] overflow-hidden bg-maroon-deep">
+                <Image
+                  src="/images/bridal-room.jpg"
+                  alt=""
+                  fill
+                  sizes="(min-width: 1280px) 270px, (min-width: 1024px) 230px, 45vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute -top-2 left-1/2 h-6 w-14 -translate-x-1/2 rotate-[4deg] bg-[#E8D9B7]/90 shadow-sm sm:w-16" />
+            </div>
+          </div>
+
+          {/* Foreground photo — marriage hall */}
+          <div className="absolute bottom-[4%] left-[23%] z-20 w-[57%] -rotate-[3deg] transition-transform duration-500 hover:rotate-0">
+            <div className="relative aspect-[4/3] bg-[#F8F0DF] p-2.5 pb-8 shadow-[0_25px_60px_rgba(0,0,0,0.45)] sm:p-3 sm:pb-9">
+              <div className="relative aspect-[5/3] overflow-hidden bg-maroon-deep">
+                <Image
+                  src="/images/marriage-hall1.jpg"
+                  alt=""
+                  fill
+                  sizes="(min-width: 1280px) 320px, (min-width: 1024px) 280px, 55vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute -top-2 left-1/2 h-6 w-14 -translate-x-1/2 rotate-[3deg] bg-[#D9BD80]/85 shadow-sm sm:w-16" />
             </div>
           </div>
         </div>
       </div>
+
     </section>
   );
 }

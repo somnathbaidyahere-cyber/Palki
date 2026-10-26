@@ -3,9 +3,36 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-export default function DiscountSuccessNotice({ discountCode, onDone, onRevealChange }) {
+export default function DiscountSuccessNotice({
+  discountCode,
+  onDone,
+  tone = "dark",
+  onRevealChange,
+}) {
   const [copied, setCopied] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
+
+  const dark = tone === "dark";
+
+  const theme = {
+    card: dark
+      ? "border-gold-light/60 bg-maroon-deep text-ivory shadow-2xl shadow-gold/15"
+      : "border-gold/50 bg-[#FFFCF6] text-ink shadow-xl shadow-maroon/10",
+
+    heading: dark ? "text-gold-light" : "text-maroon-deep",
+
+    body: dark ? "text-ivory/80" : "text-ink/75",
+
+    muted: dark ? "text-ivory/60" : "text-ink/60",
+
+    voucher: dark
+      ? "border-[#D4AF70] bg-white/5"
+      : "border-gold/70 bg-maroon/90",
+
+    code: dark ? "text-gold-light" : "text-gold-light",
+
+    button: "bg-gold-light text-maroon-deep hover:bg-gold",
+  };
 
   async function copyCode() {
     try {
@@ -35,7 +62,7 @@ export default function DiscountSuccessNotice({ discountCode, onDone, onRevealCh
     <div
       role="status"
       aria-labelledby="discount-success-title"
-      className="relative overflow-hidden rounded-2xl border border-gold-light/60 bg-maroon-deep p-5 text-ivory shadow-2xl sm:p-6 shadow-gold/15 max-w-md mx-auto"
+      className={`relative mx-auto max-w-md overflow-hidden rounded-2xl border p-5 sm:p-6 ${theme.card}`}
     >
       {/* 1. Regal Ribbon Cutting Stage */}
       <div
@@ -187,26 +214,30 @@ export default function DiscountSuccessNotice({ discountCode, onDone, onRevealCh
         <div className="absolute -top-12 -right-12 w-32 h-32 bg-gold-light/10 rounded-full blur-xl pointer-events-none" />
 
         {/* Celebration Header Tag */}
-        <div className="inline-flex items-center gap-1.5 rounded-full text-xs sm:text-sm font-medium text-gold-light/90 mb-1">
+        <div
+          className={`inline-flex items-center gap-1.5 rounded-full text-xs sm:text-sm font-medium ${theme.heading} mb-1`}
+        >
           <span>🎉</span> A little something for your celebration!
         </div>
 
         {/* Premium Heading */}
         <h3
           id="discount-success-title"
-          className="font-display text-2xl font-bold sm:text-3xl text-gold-light tracking-wide flex items-center gap-2 mt-1"
+          className={`mt-1 flex items-center gap-2 text-2xl font-bold tracking-wide sm:text-3xl ${theme.heading}`}
         >
           Exclusive Offer Unlocked! ✨
         </h3>
 
-        <p className="mt-2 text-sm leading-relaxed text-ivory/80">
+        <p className={`mt-2 text-sm leading-relaxed ${theme.body}`}>
           Thank you for choosing Palki Garden. Enjoy{" "}
           <strong className="text-gold-light font-bold">5% off</strong>an
           eligible booking with your exclusive voucher.
         </p>
 
         {/* Voucher Code Box */}
-        <div className="mt-4 rounded-xl border-2 border-dotted border-[#D4AF70] bg-white/5 p-4 text-center shadow-inner relative overflow-hidden">
+        <div
+          className={`relative mt-4 overflow-hidden rounded-xl border-2 border-dotted p-4 text-center shadow-inner ${theme.voucher}`}
+        >
           {/* Subtle light shimmer line */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-light/15 to-transparent -translate-x-full animate-[shimmer_3s_infinite]" />
 
@@ -214,7 +245,9 @@ export default function DiscountSuccessNotice({ discountCode, onDone, onRevealCh
             Your Exclusive Discount Code
           </p>
 
-          <p className="mt-1.5 break-all font-mono text-2xl font-extrabold tracking-widest sm:text-3xl text-gold-light">
+          <p
+            className={`mt-1.5 break-all font-mono text-2xl font-extrabold tracking-widest sm:text-3xl ${theme.code}`}
+          >
             {discountCode}
           </p>
 
@@ -268,7 +301,7 @@ export default function DiscountSuccessNotice({ discountCode, onDone, onRevealCh
 
         {/* Terms notice */}
 
-        <p className="mt-3 text-xs leading-relaxed text-ivory/60">
+        <p className={`mt-3 text-xs leading-relaxed ${theme.muted}`}>
           Keep this code for your booking. Valid for{" "}
           <strong className="font-semibold text-gold-light">
             72 hours from successful enquiry submission.
@@ -277,7 +310,11 @@ export default function DiscountSuccessNotice({ discountCode, onDone, onRevealCh
           booking.{" "}
           <Link
             href="/terms-and-conditions"
-            className="text-gold-light underline underline-offset-2 transition-colors hover:text-gold"
+            className={`underline underline-offset-2 transition-colors ${
+              dark
+                ? "text-gold-light hover:text-gold"
+                : "text-maroon-deep hover:text-gold"
+            }`}
           >
             T&Cs apply
           </Link>
@@ -289,7 +326,7 @@ export default function DiscountSuccessNotice({ discountCode, onDone, onRevealCh
           <button
             type="button"
             onClick={onDone}
-            className="inline-flex w-full items-center justify-center rounded-full bg-gold-light px-5 py-3 text-sm font-bold text-maroon-deep transition-all duration-300 hover:bg-gold hover:shadow-lg hover:shadow-gold/20 active:scale-[0.98]"
+            className={`inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg active:scale-[0.98] ${theme.button}`}
           >
             Done
           </button>

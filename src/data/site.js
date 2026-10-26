@@ -10,6 +10,7 @@ export const EMAIL = process.env.NEXT_PUBLIC_EMAIL
 export const VENUE = {
   name: "Palki Garden",
   tagline: "Celebrations, carried with care.",
+  heroImage:"/images/bg.jpg",
   phone: TELEPHONE,
   email: EMAIL,
   // Edit this line and the map + directions button update automatically.
