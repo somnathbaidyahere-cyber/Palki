@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Features from "@/components/Features";
 import Accommodations from "@/components/Accommodations";
-// import BookingBand from "@/components/BookingBand";
 import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 import Visit from "@/components/Visit";
@@ -11,6 +10,7 @@ import Footer from "@/components/Footer";
 import PalluReveal from "@/components/PalluReveal";
 
 import LocalBusinessSchema from "@/components/SEO/LocalBusinessSchema";
+import JourneyExplorer from "@/components/journey/JourneyExplorer";
 
 export const metadata = {
   title: "Wedding & Event Venue in Rajpur Sonarpur",
@@ -32,7 +32,7 @@ export default function Home() {
         <About />
         <Features />
         <Accommodations />
-        {/* <BookingBand /> */}
+        <JourneyExplorer />
         <Gallery />
         <Testimonials />
         <Visit />

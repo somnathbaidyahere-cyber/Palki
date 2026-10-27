@@ -757,3 +757,135 @@
     display: none !important;
   }
 }
+
+
+/* Palki Garden — scroll-driven celebration journey */
+
+/* Desktop: animate the incoming image stage once per step change */
+.journey-visual {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transform-origin: center bottom;
+}
+
+.journey-visual--active {
+  animation: journey-stage-land 760ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+@keyframes journey-stage-land {
+  0% {
+    opacity: 0.55;
+    transform: translate3d(34px, 16px, 0) scale(0.975);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.015, 0.99);
+  }
+
+  68% {
+    transform: translate3d(0, -6px, 0) scale(0.997, 1.006);
+  }
+
+  84% {
+    transform: translate3d(0, 2px, 0) scale(1.002, 0.999);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Mobile: reveal cards as they enter the viewport */
+.journey-mobile-step {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+}
+
+.journey-mobile-step--revealed {
+  animation: journey-mobile-reveal 650ms ease-out both;
+}
+
+@keyframes journey-mobile-reveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.985);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translate3d(0, -3px, 0) scale(1.005);
+  }
+
+  85% {
+    transform: translate3d(0, 1px, 0) scale(0.999);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-visual--active,
+  .journey-mobile-step,
+  .journey-mobile-step--revealed {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Palki Garden — mobile/tablet stacked journey */
+/* Palki Garden — mobile/tablet stacked journey */
+@media (max-width: 1023px) {
+  .journey-stack {
+    display: block;
+    padding-bottom: 3rem;
+  }
+
+  .journey-stack > .journey-card {
+    position: sticky;
+    top: 5rem;
+    margin-bottom: 1.5rem;
+    isolation: isolate;
+    scroll-margin-top: 6rem;
+  }
+
+  .journey-stack > .journey-card:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .journey-stack > .journey-card {
+    top: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-visual--active,
+  .journey-mobile-step,
+  .journey-mobile-step--revealed {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cta-jaali {
+  background-color: #32151d;
+  background-image:
+    inherit;
+  background-size: inherit;
+}
+
+/* Keep the motion accessible */
+@media (prefers-reduced-motion: reduce) {
+  .cta-jaali {
+    transition: none;
+  }
+}

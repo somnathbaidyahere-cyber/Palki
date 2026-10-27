@@ -1,7 +1,13 @@
 import { Cormorant_Garamond, Mukta } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from "@/data/site";
+import { Great_Vibes } from "next/font/google";
 
+const greatVibes = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 const display = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -67,7 +73,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} `}>
       <body>{children}</body>
     </html>
   );
