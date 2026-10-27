@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, VENUE } from "@/data/site";
+import { allura } from "@/lib/fonts";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -91,7 +92,7 @@ useEffect(() => {
             ></path>
             <path d="M26 7q10-9 20 0" stroke="white" stroke-width="0.9"></path>
           </svg>
-          <p className="font-display text-xl md:text-2xl lg:3xl font-semibold tracking-wide text-gold-light">
+          <p className={`${allura.className} font-display text-xl md:text-2xl lg:3xl font-semibold font-great tracking-wide text-gold-light`}>
             {VENUE.name}
           </p>
         </a>

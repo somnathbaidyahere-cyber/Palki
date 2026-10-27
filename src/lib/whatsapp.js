@@ -23,7 +23,7 @@ export function buildWhatsAppFallback(values) {
     `Event type: ${values.type}`,
     `Preferred date: ${values.date}`,
     `Expected guests: ${values.guests}`,
-    `Message: ${values.message.trim() || "Not provided"}`,
+    // `Message: ${values.message.trim() || "Not provided"}`,
   ].join("\n");
 
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;

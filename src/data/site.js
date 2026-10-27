@@ -1,19 +1,30 @@
 // Single place to edit all venue content. Components only render what's here.
+import {
+  ArrowDownRight,
+  BedDouble,
+  DoorOpen,
+  Heart,
+  Trees,
+  Utensils,
+  Users,
+} from "lucide-react";
 
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.com"
 ).replace(/\/+$/, "");
 
 export const TELEPHONE = process.env.NEXT_PUBLIC_TELEPHONE;
-export const EMAIL = process.env.NEXT_PUBLIC_EMAIL
+export const EMAIL = process.env.NEXT_PUBLIC_EMAIL;
 
 export const VENUE = {
   name: "Palki Garden",
   tagline: "Celebrations, carried with care.",
+  heroImage: "/images/bg.jpg",
   phone: TELEPHONE,
   email: EMAIL,
   // Edit this line and the map + directions button update automatically.
-  address: "Palki Garden, CC5P+RG8, Janaki Nath Basu Rd, Kodalla, Subhasgram, Rajpur Sonarpur, West Bengal 700147",
+  address:
+    "Palki Garden, CC5P+RG8, Janaki Nath Basu Rd, Kodalla, Subhasgram, Rajpur Sonarpur, West Bengal 700147",
   hours: "Open daily, 10 am to 8 pm for visits",
   instagram: "https://www.instagram.com/your_actual_profile/",
   facebook: "https://www.facebook.com/your_actual_page/",
@@ -90,31 +101,123 @@ export const FEATURES = [
 
 export const ROOMS = [
   {
-    title: "Bridal and groom's rooms",
-    text: "A quiet place to dress, rest and prepare before the ceremony.",
-    image: "/images/bridal-room.jpg",
-  },
-  {
-    title: "Family rooms",
-    text: "Space for parents and close relatives to stay together on the venue.",
+    title: "Family Room",
     image: "/images/family-room.jpg",
+
+    text: "A comfortable and welcoming stay for your guests, with thoughtful amenities to make their visit relaxing.",
+    area: "Enter actual area",
+    beds: "2",
+    capacity: "Enter guest capacity",
+    amenities: ["Air conditioning", "Geyser", "Electric kettle", "Windows"],
   },
   {
-    title: "Guest rooms",
-    text: "Comfortable rooms for elders and out-of-town guests.",
+    title: "Bridal Room",
+    image: "/images/bridal-room.jpg",
+    text: "A private, comfortable space for the bride to prepare and relax before the celebrations.",
+    area: "Enter actual area",
+    beds: "1",
+    capacity: "Enter guest capacity",
+    amenities: [
+      "Air conditioning",
+      "Geyser",
+      "Private bathroom",
+      "Natural light",
+    ],
+  },
+  {
+    title: "Guest Room",
     image: "/images/guest-room.jpg",
+    text: "A practical accommodation option for family members and guests attending your celebration.",
+    area: "Enter actual area",
+    beds: "4-5",
+    capacity: "Enter guest capacity",
+    amenities: ["Air conditioning", "Geyser", "Windows"],
   },
 ];
 
+export const JOURNEY = [
+  {
+    id: "approach",
+    number: "01",
+    note: "The approach",
+    badge: "The journey begins",
+    image: "/images/venue-walkway.jpg",
+    imageAlt: "Approach walkway at Palki Garden",
+    icon: ArrowDownRight,
+    imagePosition: "left",
+  },
+  {
+    id: "entrance",
+    number: "02",
+    note: "The entrance",
+    badge: "You enter",
+    image: "/images/venue-entrance.jpg",
+    imageAlt: "Entrance gate at Palki Garden",
+    icon: DoorOpen,
+    imagePosition: "right",
+  },
+  {
+    id: "rooms",
+    number: "03",
+    note: "Rooms & getting ready",
+    badge: "Get fresh & get ready",
+    image: "/images/family-room.jpg",
+    imageAlt: "Guest room at Palki Garden",
+    icon: BedDouble,
+    imagePosition: "left",
+  },
+  {
+    id: "hall",
+    number: "04",
+    note: "The celebration hall",
+    badge: "Let the celebrations begin",
+    image: "/images/marriage-hall.jpg",
+    imageAlt: "Celebration hall at Palki Garden",
+    icon: Users,
+    imagePosition: "right",
+  },
+  {
+    id: "ceremony",
+    number: "05",
+    note: "The ceremony",
+    badge: "Make it memorable",
+    image: "/images/ceremonial-area.jpg",
+    imageAlt: "Ceremonial area at Palki Garden",
+    icon: Heart,
+    imagePosition: "left",
+  },
+  {
+    id: "dining",
+    number: "06",
+    note: "Dining",
+    badge: "Gather around",
+    image: "/images/dining-area.jpg",
+    imageAlt: "Dining area at Palki Garden",
+    icon: Utensils,
+    imagePosition: "right",
+  },
+  {
+    id: "garden",
+    number: "07",
+    note: "The garden retreat",
+    badge: "Wind down & unwind",
+    image: "/images/garden-retreat.jpg",
+    imageAlt: "Garden retreat at Palki Garden",
+    icon: Trees,
+    imagePosition: "left",
+  },
+];
+
+
 export const GALLERY = [
-  { src: "/images/gallery-1.svg", caption: "Wedding ceremony" },
-  { src: "/images/gallery-2.svg", caption: "Evening reception" },
-  { src: "/images/gallery-3.svg", caption: "Haldi and mehendi" },
-  { src: "/images/gallery-4.svg", caption: "Floral stage décor" },
-  { src: "/images/gallery-5.svg", caption: "Engagement dinner" },
-  { src: "/images/gallery-6.svg", caption: "Anniversary celebration" },
-  { src: "/images/gallery-7.svg", caption: "Mandap setup" },
-  { src: "/images/gallery-8.svg", caption: "Entrance lighting" },
+  { src: "/images/gallery/gallery-1.jpg", caption: "Wedding ceremony" },
+  { src: "/images/gallery/gallery-2.jpg", caption: "Evening reception" },
+  { src: "/images/gallery/gallery-3.jpg", caption: "Haldi and mehendi" },
+  { src: "/images/gallery/gallery-4.jpg", caption: "Floral stage décor" },
+  { src: "/images/gallery/gallery-5.jpg", caption: "Engagement dinner" },
+  { src: "/images/gallery/gallery-6.jpg", caption: "Anniversary celebration" },
+  { src: "/images/gallery/gallery-7.jpg", caption: "Mandap setup" },
+  { src: "/images/gallery/gallery-8.jpg", caption: "Entrance lighting" },
 ];
 
 // Drop your video files into /public/videos and posters into /public/images.
@@ -123,18 +226,18 @@ export const TESTIMONIALS = [
     name: "Ananya and Rohit",
     event: "Wedding",
     video: "/videos/testimonial-1.mp4",
-    poster: "/images/testimonial-1.svg",
+    poster: "/images/testimonials/testimonial-1.png",
   },
   {
     name: "The Sharma family",
     event: "Reception",
     video: "/videos/testimonial-2.mp4",
-    poster: "/images/testimonial-2.svg",
+    poster: "/images/testimonials/testimonial-2.png",
   },
   {
     name: "Meera Iyer",
     event: "50th anniversary",
     video: "/videos/testimonial-3.mp4",
-    poster: "/images/testimonial-3.svg",
+    poster: "/images/testimonials/testimonial-3.png",
   },
 ];

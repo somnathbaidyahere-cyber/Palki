@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
 import BookingForm from "./BookingForm";
 import SectionHeading from "./ui/SectionHeading";
@@ -5,9 +8,46 @@ import { VENUE } from "@/data/site";
 
 export default function Visit() {
   const q = encodeURIComponent(VENUE.address);
+  const [showVisitCelebration, setShowVisitCelebration] = useState(false);
 
   return (
-    <section id="visit">
+    <section
+      id="visit"
+      className={`relative overflow-hidden ${
+        showVisitCelebration ? "visit-celebrating" : ""
+      }`}
+    >
+      {/* Visit celebration glow */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_65%_45%,rgba(212,175,112,0.22),transparent_65%)] transition-opacity duration-1000 ${
+          showVisitCelebration ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
+      {/* Visit celebration particles */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 z-20 overflow-hidden transition-opacity duration-700 ${
+          showVisitCelebration ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {showVisitCelebration &&
+          Array.from({ length: 18 }, (_, i) => (
+            <span
+              key={i}
+              className="hero-celebration-particle"
+              style={{
+                left: `${(i * 41 + 7) % 100}%`,
+                animationDelay: `${(i % 8) * 0.2}s`,
+                animationDuration: `${4 + (i % 4)}s`,
+                fontSize: `${12 + (i % 3) * 6}px`,
+              }}
+            >
+              {i % 3 === 0 ? "🌸" : i % 3 === 1 ? "✦" : "✨"}
+            </span>
+          ))}
+      </div>
       <div className="py-16 sm:py-24  md:py-28">
         <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
@@ -60,11 +100,14 @@ export default function Visit() {
             <p className="mt-6 text-ink/60">{VENUE.hours}</p>
           </div>
 
-          <div className="border border-gold/60 bg-white/50 p-6 sm:p-10">
+          <div
+            id="book"
+            className="border border-gold/60 bg-white/50 p-6 sm:p-10"
+          >
             <h3 className="mb-6 text-3xl font-semibold text-maroon">
-              Request a visit or a date
+              Plan your special day
             </h3>
-            <BookingForm id="visit" tone="light" />
+            <BookingForm id="visit" tone="light"  onRevealChange={setShowVisitCelebration} />
           </div>
         </div>
       </div>

@@ -15,15 +15,16 @@ const EMPTY = {
   type: EVENT_TYPES[0],
   date: "",
   guests: "",
-  message: "",
+  // message: "",
 };
 
-export default function BookingForm({ id, tone = "light", onRevealChange }) {
+export default function BookingForm({ id, tone = "light", rounded, onRevealChange }) {
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | done | error
   const [discountCode, setDiscountCode] = useState("");
   const [connectionError, setConnectionError] = useState(null);
+  const isRounded = rounded;
 
   const dark = tone === "dark";
   const today = new Date().toISOString().split("T")[0];
@@ -82,7 +83,7 @@ export default function BookingForm({ id, tone = "light", onRevealChange }) {
       formData.append("type", values.type);
       formData.append("date", values.date);
       formData.append("guests", values.guests);
-      formData.append("message", values.message.trim());
+      // formData.append("message", values.message.trim());
 
       // Discount voucher details
       formData.append("Discount Code", code);
@@ -94,7 +95,7 @@ export default function BookingForm({ id, tone = "light", onRevealChange }) {
       // Web3Forms configuration
       formData.append(
         "access_key",
-        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KE,
+        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
       );
       formData.append(
         "subject",
@@ -153,6 +154,7 @@ export default function BookingForm({ id, tone = "light", onRevealChange }) {
     return (
       <DiscountSuccessNotice
         discountCode={discountCode}
+        tone={tone}
         onDone={() => {
           setValues(EMPTY);
           setErrors({});
@@ -183,7 +185,7 @@ export default function BookingForm({ id, tone = "light", onRevealChange }) {
           value={values.name}
           onChange={onChange}
           autoComplete="name"
-          className={`${field} h-10 w-full min-[500px]:max-sm:rounded-t-[2rem] sm:rounded-tl-[2rem] md:rounded-tl-[2.5rem] lg:rounded-none`}
+          className={`${field} h-10 w-full ${isRounded? "min-[500px]:max-sm:rounded-t-[2rem] sm:rounded-tl-[2rem] md:rounded-tl-[2.5rem] lg:rounded-none":""} `}
           placeholder="Full name"
         />
 
@@ -203,7 +205,7 @@ export default function BookingForm({ id, tone = "light", onRevealChange }) {
           value={values.phone}
           onChange={onChange}
           autoComplete="tel"
-          className={`${field} h-10 w-full sm:rounded-tr-[2rem] md:rounded-tr-[2.5rem] lg:rounded-none`}
+          className={`${field} h-10 w-full ${isRounded?"sm:rounded-tr-[2rem] md:rounded-tr-[2.5rem] lg:rounded-none":""}`}
           placeholder="10-digit mobile number"
         />
 
@@ -293,7 +295,7 @@ export default function BookingForm({ id, tone = "light", onRevealChange }) {
       </div>
 
       {/* Additional message */}
-      <div className="min-w-0 sm:col-span-2">
+      {/* <div className="min-w-0 sm:col-span-2">
         <label htmlFor={`${id}-message`} className={`${label} mb-1 block`}>
           Anything we should know? (optional)
         </label>
@@ -307,7 +309,7 @@ export default function BookingForm({ id, tone = "light", onRevealChange }) {
           className={`${field} min-h-16 w-full resize-y sm:min-h-20 lg:min-h-24`}
           placeholder="Rituals, decoration ideas, rooms needed..."
         />
-      </div>
+      </div> */}
 
       {/* Submit */}
       <div className="sm:col-span-2">
@@ -338,7 +340,7 @@ export default function BookingForm({ id, tone = "light", onRevealChange }) {
           .
         </p>
         {status === "error" && (
-          <WhatsAppFallback values={values} connectionError={connectionError} />
+          <WhatsAppFallback values={values} connectionError={connectionError}  tone={tone}/>
         )}
       </div>
     </form>
