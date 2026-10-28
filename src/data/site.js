@@ -240,4 +240,22 @@ export const TESTIMONIALS = [
     video: "/videos/testimonial-3.mp4",
     poster: "/images/testimonials/testimonial-3.png",
   },
+    {
+    name: "Ananya and Rohit",
+    event: "Wedding",
+    video: "/videos/testimonial-4.mp4",
+    poster: "/images/testimonials/testimonial-4.png",
+  },
+  {
+    name: "The Sharma family",
+    event: "Reception",
+    video: "/videos/testimonial-5.mp4",
+    poster: "/images/testimonials/testimonial-5.png",
+  },
+  {
+    name: "Meera Iyer",
+    event: "50th anniversary",
+    video: "/videos/testimonial-6.mp4",
+    poster: "/images/testimonials/testimonial-6.png",
+  },
 ];
