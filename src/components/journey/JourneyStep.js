@@ -21,7 +21,7 @@ function useRevealOnce() {
           io.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -30,7 +30,16 @@ function useRevealOnce() {
   return [ref, seen];
 }
 
-export default function JourneyStep({ stop, index, total, active, image, alt, registerRef, children }) {
+export default function JourneyStep({
+  stop,
+  index,
+  total,
+  active,
+  image,
+  alt,
+  registerRef,
+  children,
+}) {
   const [revealRef, seen] = useRevealOnce();
 
   return (
@@ -49,17 +58,37 @@ export default function JourneyStep({ stop, index, total, active, image, alt, re
       >
         <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-[#32151D] shadow-xl sm:aspect-[16/11]">
           <div key={image} className={`absolute inset-0 ${styles.fadeIn}`}>
-            <Image src={image} alt={alt} fill sizes="(min-width: 640px) 90vw, 100vw" className="object-cover" />
+            <Image
+              src={image}
+              alt={alt}
+              fill
+              sizes="(min-width: 640px) 90vw, 100vw"
+              className="object-cover"
+            />
           </div>
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#32151D]/55 via-transparent to-[#32151D]/10" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#32151D]/55 via-transparent to-[#32151D]/10"
+          />
           <JourneyBadges stop={stop} index={index} total={total} />
         </div>
       </div>
 
-      <div className={`mt-6 transition-opacity duration-500 lg:mt-0 ${active ? "" : "lg:opacity-30"}`}>
+      <div
+        className={`mt-6 transition-opacity duration-500 lg:mt-0 ${active ? "" : "lg:opacity-30"}`}
+      >
         <p className="font-display text-5xl text-[#967441]">{pad(index + 1)}</p>
-        <h3 className="mt-1 font-display text-4xl font-semibold sm:text-5xl">{stop.name}</h3>
-        <p className="mt-2 font-display text-2xl italic text-[#967441]">{stop.tagline}</p>
+        <h3 className="mt-1 font-display text-4xl font-semibold sm:text-5xl">
+          {stop.name}
+        </h3>
+        <p className="mt-2 font-display text-2xl italic text-[#967441]">
+          {stop.tagline}
+        </p>
+        {stop.description && (
+          <p className="mt-3 max-w-md text-sm leading-7 text-[#49302E] sm:text-base sm:leading-8">
+            {stop.description}
+          </p>
+        )}
         {children && <div className="mt-8">{children}</div>}
       </div>
     </li>

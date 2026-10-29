@@ -18,7 +18,7 @@ export default function MemoriesInterlude() {
           className="mx-auto my-5 h-px w-10 bg-[#967441]"
         />
 
-        <p className="mx-auto max-w-md text-sm leading-7 text-slate-500 sm:text-base">
+        <p className="mx-auto max-w-md text-sm leading-7 text-slate-500 lg:text-lg">
           The laughter that fills a room, the joy of bringing everyone together,
           the little moments nobody plans but everyone remembers. Every
           celebration at Palki has a story of its own. Here's a glimpse of the
