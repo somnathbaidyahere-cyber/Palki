@@ -7,10 +7,11 @@ import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 import Visit from "@/components/Visit";
 import Footer from "@/components/Footer";
-import PalluReveal from "@/components/PalluReveal";
 
 import LocalBusinessSchema from "@/components/SEO/LocalBusinessSchema";
 import JourneyExplorer from "@/components/journey/JourneyExplorer";
+import StayInterlude from "@/components/ui/StayInterlude";
+import MemoriesInterlude from "@/components/ui/MemoriesInterlude";
 
 export const metadata = {
   title: "Wedding & Event Venue in Rajpur Sonarpur",
@@ -27,12 +28,14 @@ export default function Home() {
       <LocalBusinessSchema />
       <Navbar />
       <main>
-        <PalluReveal />
+        {/* <PalluReveal /> */}
         <Hero />
         <About />
         <Features />
         <Accommodations />
+        <StayInterlude/>
         <JourneyExplorer />
+        <MemoriesInterlude/>
         <Gallery />
         <Testimonials />
         <Visit />

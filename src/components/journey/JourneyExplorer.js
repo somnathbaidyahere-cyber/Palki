@@ -141,7 +141,7 @@ export default function JourneyExplorer() {
         </div>
 
         {/* Closing CTA */}
-        <div className="jaali cta-reveal group relative isolate mt-20 overflow-hidden rounded-[2rem] bg-[#32151D] px-6 py-16 text-center text-[#F8F4EC] sm:py-20">
+        <div className="jaali cta-reveal group relative isolate mt-12 md:mt-16 lg:mt-20 overflow-hidden rounded-[2rem] bg-[#32151D] px-6 py-10 md:py-14 text-center text-[#F8F4EC] lg:py-20">
           {/* Background image */}
           <div
             aria-hidden="true"
@@ -157,12 +157,12 @@ export default function JourneyExplorer() {
           {/* Jaali overlay: initially covers the right half */}
           <div
             aria-hidden="true"
-            className="cta-jaali absolute inset-y-0 right-0 z-0 w-4/5 bg-[#32151D] transition-transform duration-1000 ease-in-out group-hover:translate-x-full"
+            className="cta-jaali absolute inset-y-0 right-0 z-0 w-full lg:w-4/5 bg-[#32151D] transition-transform duration-1000 ease-in-out group-hover:translate-x-full"
           />
 
           {/* CTA content */}
           <div className="relative z-10">
-            <h3 className="mx-auto max-w-2xl font-display text-4xl font-semibold leading-tight sm:text-5xl">
+            <h3 className="mx-auto max-w-2xl font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight lg:text-5xl">
               Every special moment deserves a Palki.
             </h3>
 
