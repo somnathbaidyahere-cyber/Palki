@@ -1,12 +1,17 @@
-import { Cormorant_Garamond, Mukta } from "next/font/google";
+import { Alex_Brush, Great_Vibes, Cormorant_Garamond, Mukta } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from "@/data/site";
-import { Great_Vibes } from "next/font/google";
 
 const greatVibes = Great_Vibes({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
+});
+const alexBrush = Alex_Brush({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-cursive',
+  display: 'swap',
 });
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -73,7 +78,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} `}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${greatVibes.variable} ${alexBrush.variable}`}>
       <body>{children}</body>
     </html>
   );

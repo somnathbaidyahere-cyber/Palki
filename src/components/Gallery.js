@@ -284,7 +284,7 @@ export default function Gallery() {
       return;
     }
 
-    const timer = window.setInterval(next, 4500);
+    const timer = window.setInterval(next, 3100);
 
     return () => window.clearInterval(timer);
   }, [paused, next, count]);
