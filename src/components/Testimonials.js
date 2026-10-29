@@ -124,8 +124,10 @@ export default function Testimonials() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           dark
-          title="In our guests' words"
-          text="Hear what our guests' celebrations at Palki meant to them."
+          // title="In our guests' words"
+          title="Palki, our Guests and some beautiful memories."
+          // text="Hear what our guests' celebrations at Palki meant to them."
+          text="This is how our guests enjoyed at Palki Garden."
         />
 
         <div
