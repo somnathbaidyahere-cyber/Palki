@@ -74,7 +74,7 @@ export default function Navbar() {
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid ? "bg-maroon-deep/95 shadow-lg backdrop-blur" : "bg-transparent"}`}
     >
       <nav
-        className="mx-auto flex h-[60px] md:h-[72px] lg:h-20 max-w-7xl items-center justify-between px-5 sm:px-8"
+        className="mx-auto flex h-[60px] md:h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8"
         aria-label="Main"
       >
         <a href="/#top" className="flex items-center gap-2 md:gap-3">
