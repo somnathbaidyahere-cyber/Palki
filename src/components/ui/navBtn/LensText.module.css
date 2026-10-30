@@ -1,0 +1,78 @@
+
+.root {
+  --cycle: 5s;
+
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.text {
+  position: relative;
+  display: inline;
+}
+
+.char {
+  display: inline-block;
+  white-space: pre;
+
+  font: inherit;
+  letter-spacing: inherit;
+
+  transform-origin: 50% 65%;
+  will-change: transform, color, text-shadow;
+}
+
+/* Start animations only after measuring character positions */
+.ready .char {
+  animation: reading-wave var(--cycle) linear infinite;
+  animation-delay: var(--d, 0s);
+}
+
+/*
+  Invisible reading lens:
+  Each character gently enlarges and illuminates
+  as the imaginary lens passes over it.
+*/
+
+@keyframes reading-wave {
+  0% {
+    transform: translateY(0) scale(1);
+    color: inherit;
+    text-shadow: 0 0 0 transparent;
+
+    animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  3.6% {
+    transform: translateY(-0.025em) scale(1.25);
+    color: #682405;
+    text-shadow:
+      0 0 5px rgba(255, 244, 214, 0.55),
+      0 0 10px rgba(255, 226, 165, 0.3);
+
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  7.2% {
+    transform: translateY(0) scale(1);
+    color: inherit;
+    text-shadow: 0 0 0 transparent;
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    color: inherit;
+    text-shadow: 0 0 0 transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ready .char {
+    animation: none;
+  }
+
+  .char {
+    will-change: auto;
+  }
+}

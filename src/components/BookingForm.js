@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { EVENT_TYPES, MAX_GUESTS } from "@/data/site";
 import Link from "next/link";
 import { generateDiscountCode } from "@/lib/discount";
+import { playSound } from "@/lib/sounds";
+
 
 import DiscountSuccessNotice from "@/components/booking/DiscountSuccessNotice";
 import WhatsAppFallback from "@/components/booking/WhatsAppFallback";
@@ -149,6 +151,12 @@ export default function BookingForm({ id, tone = "light", rounded, onRevealChang
       window.removeEventListener("offline", handleOffline);
     };
   }, [status]);
+
+    useEffect(() => {
+  if (status === "done" && discountCode) {
+    playSound("discount");
+  }
+}, [status,discountCode]);
 
   if (status === "done" && discountCode) {
     return (

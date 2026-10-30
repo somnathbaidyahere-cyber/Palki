@@ -47,11 +47,23 @@ const CONTACT_LINKS = [
 export default function Footer() {
   return (
     <footer className="bg-maroon-deep px-5 py-12 text-center text-ivory/75 sm:py-14">
-      <p className="font-display text-2xl font-semibold text-gold-light md:text-3xl lg:text-4xl">
-        {VENUE.name}
-      </p>
+      <a href="/#top" className="flex items-center justify-center gap-2">
+          {/* Palki Icon / Illustration */}
+          <img
+            src="/images/logo/palki.png"
+            alt="Palki Garden Logo"
+            className="h-7 md:h-8 lg:h-[45px] w-auto object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+          />
 
-      <p className="mt-1">{VENUE.tagline}</p>
+          {/* Venue Name Text PNG */}
+          <img
+            src="/images/logo/logo-txt.png"
+            alt={VENUE.name}
+            className="h-8 md:h-10 lg:h-[50px] w-auto object-contain mt-1 md:mt-2"
+          />
+        </a>
+
+      <p className="mt-1 text-xs sm:text-sm md:text-base">{VENUE.tagline}</p>
 
       {/* Contact and social links */}
       <ul
@@ -103,7 +115,7 @@ export default function Footer() {
         ))}
       </ul>
 
-      <ul className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs md:text-sm">
+      <ul className="mt-5 md:mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs md:text-sm">
         <li>
           <Link
             href="/privacy-policy"
