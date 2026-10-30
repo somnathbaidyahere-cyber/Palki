@@ -3,13 +3,38 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { makePool, playShower, playDisperse } from "./petalAnimations";
 
-// One rose-petal outline (with the small notch at the top), reused by every petal.
-const PETAL = "M50 98 C34 94 10 74 6 48 C3 26 18 8 36 8 C42 8 46 12 50 15 C54 12 58 8 64 8 C82 8 97 26 94 48 C90 74 66 94 50 98Z";
-const VEIN = "M50 92 C49 70 50 48 50 24";
-const SHEEN = "M22 34 C26 20 38 13 48 18 C38 24 30 32 26 46 C22 44 20 40 22 34Z";
+// Natural rose petal with an irregular, softly scalloped upper edge.
+// Asymmetrical, naturally curved rose petal.
+const PETAL = `
+  M43 97
+  C34 92 24 85 17 75
+  C9 64 4 53 5 41
+  C5 29 11 18 21 12
+  C30 6 40 10 48 17
+  C53 21 56 26 59 23
+  C65 15 72 8 81 11
+  C91 14 96 25 94 37
+  C93 48 88 59 82 69
+  C76 80 67 88 58 93
+  C52 96 48 98 43 97
+  Z
+`;
+const VEIN = `
+  M50 92
+  C48 75 49 57 50 42
+  C51 32 52 24 54 18
+`;
+const SHEEN = `
+  M17 36
+  C19 24 28 14 37 15
+  C43 16 46 20 48 24
+  C37 22 28 29 23 43
+  C20 42 18 40 17 36
+  Z
+`;
 
 const TONES = {
-  red:    ["#D8344F", "#B01B35", "#7C0C22"],
+  red: ["#B04462", "#84213F", "#570F27"],
   rose:   ["#E2557B", "#C23460", "#8E1A3E"],
   pink:   ["#FBDDE5", "#F2B2C5", "#DD8AA6"],
   yellow: ["#FBE88A", "#F1C93B", "#D79F1B"],

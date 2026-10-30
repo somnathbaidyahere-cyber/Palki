@@ -4,7 +4,9 @@
 
 export const HERO_PHOTOS = [
   { src: "/images/memory/memory-1.webp", alt: "The marriage hall at Palki Garden", ratio: 1.25 },
-  { src: "/images/memory/memory-3.webp", alt: "A bridal room at Palki Garden", ratio: 0.8 },
   { src: "/images/memory/memory-2.webp", alt: "A guest room at Palki Garden", ratio: 0.8 },
+  { src: "/images/memory/memory-3.webp", alt: "A bridal room at Palki Garden", ratio: 0.8 },
+   { src: "/images/memory/memory-4.webp", alt: "A bridal room at Palki Garden", ratio: 0.8 },
+  { src: "/images/memory/memory-5.webp", alt: "A guest room at Palki Garden", ratio: 0.8 },
   // { src: "/images/your-fourth-photo.jpg", alt: "…", ratio: 1.25 },
 ];

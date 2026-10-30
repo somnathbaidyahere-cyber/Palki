@@ -1,4 +1,5 @@
-import HeroFrameSequence from "./hero/HeroFrameSequence";
+// import HeroFrameSequence from "./hero/HeroFrameSequence";
+import HeroFrameSequence from "./frame-animation/HeroFrameSequence";
 
 export default function Hero() {
   return (
