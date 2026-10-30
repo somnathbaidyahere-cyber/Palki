@@ -4,7 +4,7 @@ export default function SectionHeading({ title, text, dark = false, align = "cen
   const center = align === "center";
   return (
     <header className={`mx-auto max-w-2xl ${center ? "text-center" : "text-left"}`}>
-      <h2 className={`text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl ${dark ? "text-ivory" : "text-maroon"}`}>
+      <h2 className={`text-3xl  leading-tight md:text-4xl lg:text-5xl ${dark ? "text-ivory" : "text-maroon"}`}>
         {title}
       </h2>
       <Ornament className={`mt-3 md:mt-5 ${center ? "" : "justify-start"}`} />

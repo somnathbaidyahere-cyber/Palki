@@ -78,7 +78,7 @@ export default function JourneyStep({
         className={`mt-6 transition-opacity duration-500 lg:mt-0 ${active ? "" : "lg:opacity-30"}`}
       >
         <p className="font-display text-5xl text-[#967441]">{pad(index + 1)}</p>
-        <h3 className="mt-1 font-display text-4xl font-semibold sm:text-5xl">
+        <h3 className="mt-1 font-display text-4xl sm:text-5xl">
           {stop.name}
         </h3>
         <p className="mt-2 font-display text-2xl italic text-[#967441]">

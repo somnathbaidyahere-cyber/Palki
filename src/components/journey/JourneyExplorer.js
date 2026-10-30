@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import Ornament from "../ui/Ornament";
+import SectionHeading from "../ui/SectionHeading";
 import JourneyRail from "./JourneyRail";
 import JourneyStage from "./JourneyStage";
 import JourneyStep from "./JourneyStep";
@@ -85,19 +85,11 @@ export default function JourneyExplorer() {
       className="bg-[#F8F4EC] py-24 text-[#32151D] sm:py-32"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <header className="mx-auto max-w-2xl text-center">
-          <h2
-            id="journey-title"
-            className="font-display text-4xl font-semibold leading-tight sm:text-5xl"
-          >
-            A day at {VENUE.name}
-          </h2>
-          <Ornament className="mt-5" />
-          <p className="mt-5 text-lg leading-relaxed text-[#32151D]/75">
-            Follow the path your guests will take, from arrival to the last
-            quiet moments of the evening.
-          </p>
-        </header>
+        <SectionHeading
+          title="A day at Palki Garden"
+          text=" Follow the path your guests will take, from arrival to the last
+            quiet moments of the evening."
+        />
 
         <div className="mt-14 lg:mt-20 lg:grid lg:grid-cols-[10rem_minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-12">
           <JourneyRail stops={stops} active={active} onSelect={goTo} />
