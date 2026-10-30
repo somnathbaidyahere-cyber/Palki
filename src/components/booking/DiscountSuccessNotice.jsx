@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { playSound } from "@/lib/sounds";
+import { setConfig } from "next/config";
 
 export default function DiscountSuccessNotice({
   discountCode,
@@ -57,6 +59,12 @@ export default function DiscountSuccessNotice({
   useEffect(() => {
     onRevealChange?.(isRevealed);
   }, [isRevealed, onRevealChange]);
+
+  useEffect(() => {
+    if (copied) {
+      playSound("codeCopied");
+    }
+  }, [copied, setCopied]);
 
   return (
     <div
