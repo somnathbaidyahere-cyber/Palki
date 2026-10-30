@@ -317,7 +317,7 @@ export default function Gallery() {
         <div
           ref={track}
           onScroll={onScroll}
-          className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto py-4 scroll-smooth"
+          className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto py-4 scroll-smooth scrollbar-hide"
         >
           <div
             ref={leadingSpacer}

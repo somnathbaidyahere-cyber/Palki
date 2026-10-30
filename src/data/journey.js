@@ -13,7 +13,7 @@ export const JOURNEY_STOPS = [
     tagline: "The journey begins",
     description:
       "A welcoming path, a little greenery, and a chance to leave the everyday behind. Your celebration begins even before you step inside.",
-    image: "/images/journey/approach.jpg",
+    image: "/images/journey/approach.webp",
     alt: "The approach to the venue",
     badge: { icon: "parking", text: "Parking lot on site" },
   },
@@ -23,7 +23,7 @@ export const JOURNEY_STOPS = [
     tagline: "You enter",
     description:
       "The greetings, the smiles, the familiar faces arriving one by one. There's something special about seeing everyone you love come together in one place.",
-    image: "/images/journey/entrance.jpg",
+    image: "/images/journey/entrance.webp",
     alt: "The venue entrance",
     badge: { icon: "ac", text: "Fully air-conditioned" },
   },
@@ -43,7 +43,7 @@ export const JOURNEY_STOPS = [
     tagline: "Let the celebrations begin",
     description:
       "From heartfelt speeches to joyful reunions and photographs you'll revisit for years, this is where the energy of your gathering comes alive.",
-    image: "/images/journey/celebration.jpg",
+    image: "/images/journey/celebration.webp",
     alt: "The celebration hall",
     badge: { icon: "area", text: "5,000 sq ft · up to 700 guests" },
   },
@@ -53,7 +53,7 @@ export const JOURNEY_STOPS = [
     tagline: "Make it memorable",
     description:
       "Make space for the traditions, promises, and meaningful rituals that bring everyone closer. Some moments deserve to be remembered exactly as they happen.",
-    image: "/images/journey/ceremony.jpg",
+    image: "/images/journey/ceremony.webp",
     alt: "The ceremonial area",
     badge: { icon: "decor", text: "Custom decoration" },
   },
@@ -63,7 +63,7 @@ export const JOURNEY_STOPS = [
     tagline: "Gather around",
     description:
       "Pass around a favourite dish, catch up over a meal, and let conversations wander. Often, the simplest moments around the table become the sweetest memories.",
-    image: "/images/journey/dining.jpg",
+    image: "/images/journey/dining.webp",
     alt: "The dining area",
     badge: { icon: "kitchen", text: "Dedicated kitchen with backup" },
   },
@@ -73,7 +73,7 @@ export const JOURNEY_STOPS = [
     tagline: "Wind down & unwind",
     description:
       "When the bustle softens, find a moment to breathe, share one last conversation, and savour the happiness of being together before heading home.",
-    image: "/images/journey/garden.jpg",
+    image: "/images/journey/garden.webp",
     alt: "The garden retreat",
     badge: null,
   },
