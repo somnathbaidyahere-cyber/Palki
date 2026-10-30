@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, VENUE } from "@/data/site";
-import { allura, greatVibes } from "@/lib/fonts";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,81 +19,77 @@ export default function Navbar() {
 
   const solid = scrolled || open;
 
-useEffect(() => {
-  // Homepage sections exist only on the homepage.
-  if (window.location.pathname !== "/") {
-    setActiveSection("");
-    return;
-  }
-
-  const updateActiveSection = () => {
-    // Activation line: 30% down the viewport.
-    const activationPoint = window.innerHeight * 0.3;
-
-    let currentSection = "";
-
-    for (const link of NAV_LINKS) {
-      // Extract "#about" from "/#about".
-      const targetId = new URL(
-        link.href,
-        window.location.origin,
-      ).hash.slice(1);
-
-      if (!targetId) continue;
-
-      const section = document.getElementById(targetId);
-
-      if (!section) continue;
-
-      const rect = section.getBoundingClientRect();
-
-      if (rect.top <= activationPoint) {
-        currentSection = link.href;
-      }
+  useEffect(() => {
+    // Homepage sections exist only on the homepage.
+    if (window.location.pathname !== "/") {
+      setActiveSection("");
+      return;
     }
 
-    setActiveSection(currentSection);
-  };
+    const updateActiveSection = () => {
+      // Activation line: 30% down the viewport.
+      const activationPoint = window.innerHeight * 0.3;
 
-  updateActiveSection();
+      let currentSection = "";
 
-  window.addEventListener("scroll", updateActiveSection, {
-    passive: true,
-  });
+      for (const link of NAV_LINKS) {
+        // Extract "#about" from "/#about".
+        const targetId = new URL(link.href, window.location.origin).hash.slice(
+          1,
+        );
 
-  window.addEventListener("resize", updateActiveSection);
+        if (!targetId) continue;
 
-  return () => {
-    window.removeEventListener("scroll", updateActiveSection);
-    window.removeEventListener("resize", updateActiveSection);
-  };
-}, []);
+        const section = document.getElementById(targetId);
+
+        if (!section) continue;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= activationPoint) {
+          currentSection = link.href;
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid ? "bg-maroon-deep/95 shadow-lg backdrop-blur" : "bg-transparent"}`}
     >
       <nav
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8"
+        className="mx-auto flex h-[60px] md:h-[72px] lg:h-20 max-w-7xl items-center justify-between px-5 sm:px-8"
         aria-label="Main"
       >
-        <a href="/#top" className="flex gap-2 md:gap-3">
-          <svg
-            viewBox="0 0 72 34"
-            fill="none"
-            aria-hidden="true"
-            className="mt-[5px] md:mt-1 lg:mt-0 h-5 w-auto sm:h-6 lg:h-8"
-          >
-            <path
-              d="M5 24h62M17 24V14h38v10M20 14l6-8h20l6 8M24 24l-3 5m27-5 3 5M26 7V4m20 3V4M31 14v10m10-10v10"
-              stroke="white"
-              stroke-width="0.9"
-            ></path>
-            <path d="M26 7q10-9 20 0" stroke="white" stroke-width="0.9"></path>
-          </svg>
-          <p className={`${greatVibes.className} text-xl md:text-2xl lg:3xl font-extrabold font-great tracking-wide text-gold-light`}>
-            {VENUE.name}
-          </p>
+        <a href="/#top" className="flex items-center gap-2 md:gap-3">
+          {/* Palki Icon / Illustration */}
+          <img
+            src="/images/logo/palki.png"
+            alt="Palki Garden Logo"
+            className="h-9 md:h-[45px] lg:h-[50px] w-auto object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+          />
+
+          {/* Venue Name Text PNG */}
+          <img
+            src="/images/logo/logo-txt.png"
+            alt={VENUE.name}
+            className="h-10 md:h-14 lg:h-[60px] w-auto object-contain mt-1 md:mt-2"
+          />
         </a>
 
         <ul className="hidden items-center gap-8 lg:flex">
