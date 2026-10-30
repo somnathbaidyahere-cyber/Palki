@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, VENUE } from "@/data/site";
+import LensText from "@/components/ui/navBtn/LensText";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -121,8 +122,8 @@ export default function Navbar() {
           })}
 
           <li>
-            <a href="#book" className="btn-gold !py-2">
-              Celebrate at Palki
+            <a href="#book" className="btn-gold-cta !py-2">
+              <span className="cta-label">Celebrate at Palki</span>
             </a>
           </li>
         </ul>
